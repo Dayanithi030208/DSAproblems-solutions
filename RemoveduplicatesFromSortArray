@@ -1,0 +1,23 @@
+class Solution {
+    public int removeDuplicates(int[] nums) {
+       int a=0;
+       for(int i=1;i<nums.length;i++){
+        if(nums[i]!=nums[a]){
+            a++;
+            nums[a]=nums[i];
+        }
+       }
+       return a+1;
+    //    Set<Integer> set=new HashSet<>();
+    //    for(int i=0;i<nums.length;i++){
+    //     set.add(nums[i]);
+    //    }
+    //    int index=0;
+    //    for(Iterator<Integer> it=set.iterator();it.hasNext();){
+    //     nums[index]=it.next();
+    //     index++;
+    //    }
+    //    return index;
+    //order may change it is disadvantage
+    }
+}
