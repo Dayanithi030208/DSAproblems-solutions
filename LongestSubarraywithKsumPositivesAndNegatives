@@ -1,0 +1,15 @@
+ int prefixsum=0,maxlen=0;
+     Map<Integer,Integer> map=new HashMap<>();
+     for(int i=0;i<nums.length;i++){
+         prefixsum=nums[i];
+         if(prefixsum==k){
+             maxlen=Math.max(maxlen,i+1);
+         }
+         if(map.containsKey(prefixsum-k)){
+             maxlen=Math.max(maxlen,i-map.get(prefixsum-k));
+         }
+         if(!map.containsKey(prefixsum)){
+             map.put(prefixsum,i);
+         }
+     }
+     return maxlen;
