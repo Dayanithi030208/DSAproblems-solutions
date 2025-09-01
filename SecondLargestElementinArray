@@ -1,0 +1,25 @@
+class Solution {
+    public int secondLargestElement(int[] nums) {
+    int large=nums[0];
+    int second=-1;
+    //T.C=O(2N)
+    // for(int i=1;i<nums.length;i++){
+    //     if(nums[i]>large) large=nums[i];
+    // }
+    // for(int i=0;i<nums.length;i++){
+    //     if(nums[i]<large&&nums[i]>second) second=nums[i];
+    // }
+    // return second;
+    //T.C=O(N)
+    for(int i=1;i<nums.length;i++){
+        if(nums[i]>large){
+            second=large;
+            large=nums[i];
+        }
+        if(nums[i]>second&&nums[i]<large){
+            second=nums[i];
+        }
+    }
+    return second;
+    }
+}
