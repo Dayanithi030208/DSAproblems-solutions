@@ -1,0 +1,87 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+    //     int[][] ans=new int[matrix.length][matrix[0].length];
+    //     for(int i=0;i<matrix.length;i++){
+    //         for(int j=0;j<matrix[0].length;j++){
+    //             ans[i][j]=matrix[i][j];
+    //         }
+    //     }
+    //     for(int i=0;i<matrix.length;i++){
+    //         for(int j=0;j<matrix[0].length;j++){
+    //             if(matrix[i][j]==0){
+    //                 setrowcol0(ans,i,j);
+    //             }
+    //         }
+    //     }
+    //     for(int i=0;i<matrix.length;i++){
+    //         for(int j=0;j<matrix[0].length;j++){
+    //             matrix[i][j]=ans[i][j];
+    //         }
+    //     }
+    // }
+    // static void setrowcol0(int[][] ans,int i, int j){
+    //     for(int a=0;a<ans.length;a++){
+    //         ans[a][j]=0;
+    //     }
+    //     for(int b=0;b<ans[0].length;b++){
+    //         ans[i][b]=0;
+    //     }
+    // T.C=O(N^2) S.C=0(N^2)
+    //Better approach
+    // int[] rows=new int[matrix.length];
+    // int[] cols=new int[matrix[0].length];
+    // for(int i=0;i<matrix.length;i++){
+    //     for(int j=0;j<matrix[0].length;j++){
+    //         if(matrix[i][j]==0){
+    //             rows[i]=1;
+    //             cols[j]=1;
+    //         }
+    //     }
+    // }
+    // for(int i=0;i<matrix.length;i++){
+    //     for(int j=0;j<matrix[0].length;j++){
+    //         if(rows[i]==1&&cols[j]==1){
+    //             setrowcol0(matrix,i,j);
+    //         }
+    //     }
+    // }
+    // }
+    // static void setrowcol0(int[][] ans,int i, int j){
+    //     for(int a=0;a<ans.length;a++){
+    //         ans[a][j]=0;
+    //     }
+    //     for(int b=0;b<ans[0].length;b++){
+    //         ans[i][b]=0;
+    //     }
+    // optimal approach where we can stil reduce the space complexity
+    int col0=0;
+    // matrix[0][] - col
+    // matrix[][0] - row
+    for(int i=0;i<matrix.length;i++){
+        if(matrix[i][0]==0) col0=1;
+        for(int j=1;j<matrix[0].length;j++){
+            if(matrix[i][j]==0){
+                matrix[0][j]=0;
+                matrix[i][0]=0;
+            }
+        }
+    }
+    for(int i=1;i<matrix.length;i++){
+        for(int j=1;j<matrix[0].length;j++){
+            if(matrix[0][j]==0||matrix[i][0]==0){
+                matrix[i][j]=0;
+            }
+        }
+    }
+    if(matrix[0][0]==0){
+        for(int j=0;j<matrix[0].length;j++){
+            matrix[0][j]=0;
+        }
+    }
+    if(col0==1){
+        for(int i=0;i<matrix.length;i++){
+            matrix[i][0]=0;
+        }
+    }
+    }
+}
