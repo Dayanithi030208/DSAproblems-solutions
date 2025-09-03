@@ -1,0 +1,40 @@
+class Solution {
+    public void rotate(int[][] matrix) {
+        for(int i=0;i<matrix.length;i++){
+            for(int j=i+1;j<matrix.length;j++){
+                swap(matrix,i,j);
+            }
+        }
+        for(int i=0;i<matrix.length;i++){
+            reverse(matrix,i);
+        }
+    }
+    static void swap(int[][] matrix,int i, int j){
+        int temp=matrix[i][j];
+        matrix[i][j]=matrix[j][i];
+        matrix[j][i]=temp;
+    }
+    static void reverse(int [][]matrix,int i){
+        int left=0;
+        int right=matrix[i].length-1;
+       while(left<right){
+         int temp=matrix[i][left];
+        matrix[i][left]=matrix[i][right];
+        matrix[i][right]=temp;
+        left++;
+        right--;
+       }
+    // bruteforce approach where TC-O(N^2) and SC(n^2)
+    // int[][] ans=new int[matrix.length][matrix.length];
+    // for(int i=0;i<matrix.length;i++){
+    //     for(int j=0;j<matrix.length;j++){
+    //         ans[j][matrix.length-1-i]=matrix[i][j];
+    //     }
+    // }
+    //  for(int i=0;i<matrix.length;i++){
+    //     for(int j=0;j<matrix.length;j++){
+    //         matrix[i][j]=ans[i][j];
+    //     }
+    // }
+    }
+}
