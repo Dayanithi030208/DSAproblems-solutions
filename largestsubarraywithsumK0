@@ -1,0 +1,31 @@
+class Solution {
+    public int maxLen(int[] arr) {
+        // Your code goes here
+        // int maxcnt=0;
+        // for(int i=0;i<arr.length;i++){
+        //     int cnt=0;
+        //     int sum=0;
+        //     for(int j=i;j<arr.length;j++){
+        //         sum+=arr[j];
+        //         cnt++;
+        //         if(sum==0){
+        //         maxcnt=Math.max(maxcnt,cnt);
+        //     }
+        //     }
+        // }
+        // return maxcnt;
+        int prefixsum=0;
+        for(int i=0;i<nums.length;i++){
+            prefixsum+=nums[i];
+            if(prefixsum==0){
+                maxcnt=i+1;
+            }
+            if(map.containsKey(prefixsum)){
+                maxcnt=Math.max(maxcnt,i-map.get(prefixsum));
+            }
+            else{
+                map.put(prefixsum,i);
+            }
+        }
+    }
+}
