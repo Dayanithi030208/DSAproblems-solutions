@@ -1,0 +1,16 @@
+class Solution {
+    public int subarraysWithXorK(int[] nums, int k) {
+      Map<Integer,Integer> map=new HashMap<>();
+      int cnt=0,prefixor=0;
+      map.put(0,1);
+      for(int i=0;i<nums.length;i++){
+        prefixor^=nums[i];
+        int complement=prefixor^k;
+        if(map.containsKey(complement)){
+            cnt+=map.get(complement);
+        }
+        map.put(prefixor,map.getOrDefault(prefixor,0)+1);
+      }
+      return cnt;
+    }
+}
