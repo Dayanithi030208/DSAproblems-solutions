@@ -1,0 +1,56 @@
+import java.util.*;
+
+public class CountOccurences {
+    public int countOccurrences(int[] arr, int target) {
+        int lbans = firstoccur(arr, target);
+        int ubans = lastoccur(arr, target);
+        if (lbans == -1 || ubans == -1) return 0; // handle not found
+        return ubans - lbans + 1;
+    }
+
+    public static int firstoccur(int[] arr, int target) {
+        int left = 0, right = arr.length - 1, ans = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2; // avoid overflow
+            if (arr[mid] == target) {
+                ans = mid;
+                right = mid - 1; // search on left side
+            } else if (arr[mid] > target) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return ans;
+    }
+
+    public static int lastoccur(int[] arr, int target) {
+        int left = 0, right = arr.length - 1, ans = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2; // avoid overflow
+            if (arr[mid] == target) {
+                ans = mid;
+                left = mid + 1; // search on right side
+            } else if (arr[mid] > target) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return ans;
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        CountOccurences sol = new CountOccurences();
+        int[] arr = {1, 2, 2, 2, 3, 4, 5};
+        int target = 2;
+        System.out.println("Count of " + target + " = " + sol.countOccurrences(arr, target));
+
+        target = 6;
+        System.out.println("Count of " + target + " = " + sol.countOccurrences(arr, target));
+
+        target = 1;
+        System.out.println("Count of " + target + " = " + sol.countOccurrences(arr, target));
+    }
+}
