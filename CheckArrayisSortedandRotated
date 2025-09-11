@@ -1,3 +1,4 @@
+//optimal
 class Solution {
     public boolean check(int[] nums) {
         int count=1;
@@ -10,3 +11,36 @@ class Solution {
         return count>=n;
     }
 }
+//bruteforce
+public class sortrotate {
+    public static void main(String[] args) {
+        int[] nums={1,2,3,4,5};
+        int n=nums.length;
+        if(sortcheck(nums,n)) System.out.println("Already Sorted");
+        else{
+            int cnt=0;
+            if(nums[0]>nums[n-1]) cnt++;
+            for(int i=n-1;i>0;i--){
+                if(nums[i]!=nums[i-1]+1) break;
+                cnt++;
+            }
+            while(cnt!=0){
+                int temp=nums[n-1];
+                for(int i=n-1;i>0;i--){
+                    nums[i]=nums[i-1];
+                }
+                nums[0]=temp;
+                cnt--;
+            }
+            if(sortcheck(nums,n)) System.out.println("Rotatted and sorted ");
+            else System.out.println("Not sorted");
+        }
+    } 
+     public static boolean sortcheck(int[] nums,int n){
+            for(int i=0;i<n-1;i++){
+                if(nums[i]>nums[i+1]) return false; 
+            }
+            return true;
+        }
+}
+
