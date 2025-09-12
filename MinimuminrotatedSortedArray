@@ -1,0 +1,30 @@
+class Solution {
+    public int findMin(int[] nums) {
+        // if(nums[0]<nums[nums.length-1]) return nums[0];
+        // if(nums.length==1) return nums[0];
+        // for(int i=nums.length-1;i>0;i--){
+        //     if(nums[i]<nums[i-1]) return nums[i];
+        // }
+        // return -1;
+        // using binary search
+        int left=0;
+        int right=nums.length-1;
+        int ans=Integer.MAX_VALUE;
+        while(left<=right){
+            if(nums[left]<=nums[right]){
+                ans=Math.min(ans,nums[left]);
+                break;
+            }
+            int mid=(left+right)/2;
+            if(nums[left]<=nums[mid]){
+                ans=Math.min(ans,nums[left]);
+                left=mid+1;
+            }
+            else{
+                ans=Math.min(ans,nums[mid]);
+                right=mid-1;
+            }
+        }
+        return ans;
+    }
+}
