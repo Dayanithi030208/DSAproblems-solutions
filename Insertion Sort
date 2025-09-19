@@ -1,0 +1,23 @@
+public class sortzoho {
+    public static void main(String[] args) {
+    // Insertion Sort avg,worst-o(N^2) best-o(n)
+        int[] nums={7,1,3,5,4};  
+        boolean sorted=true;
+   for(int i=1;i<nums.length;i++){
+    int j=i;
+    while(j>0&&nums[j-1]>nums[j]){
+        swap(nums,j-1,j);
+        j--;
+        sorted=false;
+    }
+    if(sorted) break;
+   }
+   for(int num:nums) System.out.print(num+" ");
+   System.out.println(sorted);
+    }
+    public static void swap(int[] nums,int i,int j){
+        int temp=nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
+    }
+}
