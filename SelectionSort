@@ -1,0 +1,21 @@
+public class sortzoho {
+    public static void main(String[] args) {
+    // Selection sort in All cases O(n^2)
+    //     int[] nums={7, 4, 1, 5, 3};
+    //     for(int i=0;i<nums.length;i++){
+    //         int mini=i;
+    //         for(int j=i;j<nums.length;j++){
+    //             if(nums[j]<nums[mini]){
+    //                 mini=j;
+    //             }
+    //         }
+    //         swap(nums,i,mini);
+    //     }
+    //     for(int num:nums) System.out.print(num+" ");
+    // }
+    // public static void swap(int[] nums,int i,int j){
+    //     int temp=nums[i];
+    //     nums[i]=nums[j];
+    //     nums[j]=temp;
+    }
+}
