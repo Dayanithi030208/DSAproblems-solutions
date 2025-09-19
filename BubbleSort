@@ -1,6 +1,6 @@
 public class sortzoho {
     public static void main(String[] args) {
-        // Bubble sort 
+        // Bubble sort TimeComplexity ave,worst-O(N^2) best-O(N)
         int[] nums={1,3,4,5,7};  
         Boolean sort=true;
         for(int i=nums.length;i>=0;i--){
