@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class problemszoho {
+    public static void main(String[] args) {
+        // frequency of num
+        // int[] nums= {1, 2, 2, 1, 3};
+        // Map<Integer,Integer> map=new HashMap<>();
+        // for(int i=0;i<nums.length;i++){
+        //     map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+        // }
+        // ArrayList<ArrayList<Integer>> list=new ArrayList<>();
+        // for(Map.Entry<Integer,Integer> entry:map.entrySet()){
+        //     ArrayList<Integer> pair=new ArrayList<>();
+        //     pair.add(entry.getKey());
+        //     pair.add(entry.getValue());
+        //     list.add(pair);
+        // }
+        // System.out.println(list);
+        // frquency of character
+        String s="Dayanithi";
+        int[] hash=new int[256];
+        for(int i=0;i<s.length();i++){
+            hash[s.charAt(i)]++;
+        }
+        for(int i=0;i<256;i++){
+            if(hash[i]>0){
+                char ch=(char)i;
+                System.out.println(ch+" count "+hash[i]);
+            }
+        }
+    }
+}
