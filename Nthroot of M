@@ -1,0 +1,26 @@
+class Solution {
+    public int NthRoot(int N, int M) {
+         long low=1;
+      long high=M;
+      long ans=1;
+      while(low<=high){
+        long mid=(low+high)/2;
+        long check=1;
+        for(int i=1;i<=N;i++){
+          check*=mid;
+        }
+        if(check=M){
+            ans=mid;
+            break;
+        }
+        if(check>M){
+            high=mid-1;
+        }
+        else{
+            low=mid+1;
+            ans=mid;
+        }
+      }
+      return ans;
+    }
+}
