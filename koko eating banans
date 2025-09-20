@@ -1,0 +1,34 @@
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int low = 1;
+        int high = maxele(piles);
+        int ans=Integer.MAX_VALUE;
+        while(low<=high){
+            int mid=(low+high)/2;
+            long tottime=timecal(piles,mid);
+            if(tottime<=h){
+                ans=Math.min(ans,mid);
+                high=mid-1;
+            }else{
+                low=mid+1;
+            }
+        }
+        return ans;
+    }
+    public static int maxele(int[] piles){
+        int a=Integer.MIN_VALUE;
+        for(int i=0;i<piles.length;i++){
+            if(piles[i]>a){
+                a=piles[i];
+            }
+        }
+        return a;
+    } 
+    public static long timecal(int[] piles,int mid){
+        long timereq=0;
+        for(int i=0;i<piles.length;i++){
+            timereq+=(piles[i]+mid-1)/mid;
+        }
+        return timereq;
+    }
+}
