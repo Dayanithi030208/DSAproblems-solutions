@@ -1,0 +1,25 @@
+import java.util.Arrays;
+
+public class sortzoho {
+    public static void main(String[] args) {
+        int[] nums={7,1,3,5,4};  
+    //recursive Bubble sort TimeComplexity ave,worst-O(N^2) best-O(N)
+     bubblesort(nums,nums.length);
+     System.out.println(Arrays.toString(nums));
+    }
+    public static void bubblesort(int[] nums,int n){
+        if(n==1) return;
+        for(int i=1;i<n;i++){
+            if(nums[i-1]>nums[i]){
+                swap(nums,i-1,i);
+            }
+        }
+        bubblesort(nums, n-1);
+    }
+    public static void swap(int[] nums,int i,int j){
+        int temp=nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
+    }
+}
+
