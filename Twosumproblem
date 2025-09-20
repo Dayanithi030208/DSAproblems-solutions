@@ -22,3 +22,32 @@ class Solution {
         return new int[0];
     }
 }
+package com.practice.zoho;
+
+import java.util.*;
+
+public class Practicezoho {
+	public static void main(String[] args) {
+		 long start = System.nanoTime();
+		int[] nums= {2,7,11,15};
+//		Arrays.sort(nums);
+//		two sum
+		int left=0;
+		int right=nums.length-1;
+		int target=9;
+		while(left<right) {
+			if(nums[left]+nums[right]==target) {
+				break;
+			}
+			if(nums[left]+nums[right]<target) {
+				left++;
+			}else {
+				right--;
+			}
+		}
+		System.out.println(left+" "+right);
+		long end = System.nanoTime();
+		System.out.println("Total runtime: " + (end - start)/1_000_000.0 + " ms");
+	}
+}
+
