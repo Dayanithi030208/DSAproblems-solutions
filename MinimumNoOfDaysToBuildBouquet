@@ -1,0 +1,39 @@
+class Solution {
+    public int minDays(int[] bloomDay, int m, int k) {
+        int n=bloomDay.length;
+        if((long)m*k>n) return -1;
+        else{
+            int lv=Integer.MAX_VALUE;
+            int  mv=Integer.MIN_VALUE;
+            for(int num:bloomDay){
+                if(num>mv) mv=num;
+                if(num<lv) lv=num;
+            }
+            int low=lv;
+            int high=mv;
+            while(low<high){
+                int mid=(low+high)/2;
+                if(canBouquet(bloomDay,mid,m,k)) high=mid;
+                else low=mid+1;
+            }
+            return low;
+        }
+    }
+    private boolean canBouquet(int[] bloomDay,int mid,int m,int k){
+        int flowers=0;
+        int bouquets=0;
+        for(int i=0;i<bloomDay.length;i++){
+            if(mid>=bloomDay[i]) {
+                flowers++;
+                if(flowers==k){
+                    bouquets++;
+                    flowers=0;
+                }
+            }
+            else{
+                flowers=0;
+            }
+        }
+        return bouquets>=m;
+    }
+}
