@@ -1,0 +1,34 @@
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int n=weights.length;
+        int max=Integer.MIN_VALUE;
+        int totalweight=0;
+        for(int num:weights){
+            if(num>max){
+                max=num;
+            }
+            totalweight+=num;
+        }
+        int low=max;
+        int high=totalweight;
+        while(low<high){
+            int mid=(low+high)/2;
+            int daysreq=1;
+            int carryweight=0;
+            for(int i=0;i<n;i++){
+                if(carryweight+weights[i]>mid){
+                    daysreq++;
+                    carryweight=0;
+                }
+                carryweight+=weights[i];
+            }
+            if(daysreq<=days){
+                high=mid;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return low;
+    }
+}
