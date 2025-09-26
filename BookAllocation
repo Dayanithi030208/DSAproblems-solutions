@@ -1,0 +1,33 @@
+Approach 1 with flaws :
+package com.practice.demo;
+
+import java.util.Scanner;
+
+public class BookAllocation {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter length of the array: ");
+		int n=sc.nextInt();
+		int[] nums=new int[n];
+		System.out.println("Enter the elements in the array :");
+		for(int i=0;i<n;i++) {
+			nums[i]=sc.nextInt();
+		}
+		int no_of_students=1;
+		int m=no_of_students;
+		int sum=0;
+		for(int num:nums) sum+=num;
+		int maxalloclimit=sum/m;
+		int calsum=0;
+		boolean check=false;
+		for(int i=0;i<n;i++) {
+			calsum+=nums[i];
+			if(calsum>maxalloclimit) {
+				break;
+			}
+			
+		}
+		System.out.println(calsum);
+	}
+}
+Approach 2:
