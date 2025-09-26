@@ -1,0 +1,42 @@
+package com.practice.demo;
+import java.util.*;
+public class AggressiveCows {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter length of the array: ");
+		int n=sc.nextInt();
+		int[] nums=new int[n];
+		System.out.println("Enter the elements in the array :");
+		for(int i=0;i<n;i++) {
+			nums[i]=sc.nextInt();
+		}
+		int max=Integer.MIN_VALUE;
+		for(int num:nums) {
+			if(num>max) max=num;
+		}
+		Arrays.sort(nums);
+		int k=2;
+		int cows=k;
+		int ans=-1;
+		for(int i=1;i<=max;i++) {
+			if(canweplace(nums,i,cows)) continue;
+			else  {
+				ans=i-1;
+				break;
+			}
+		}
+		System.out.println(ans);
+	}
+	private static boolean canweplace(int[] nums,int distance,int cows) {
+		int cowsplaced=1;
+		int last=nums[0];
+		for(int i=1;i<nums.length;i++) {
+			if(nums[i]-last>=distance) {
+				cowsplaced++;
+				last=nums[i];
+			}
+			if(cowsplaced>=cows) return true;
+		}
+		return false;
+	}
+}
