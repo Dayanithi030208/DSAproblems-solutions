@@ -21,3 +21,42 @@ class Solution {
         return minans;
     }
 }
+Approach 2:
+class Solution {
+    public int splitArray(int[] nums, int k) {
+       int max=Integer.MIN_VALUE;
+       int totalsum=0;
+       for(int num:nums){
+        totalsum+=num;
+        if(num>max) max=num;
+       }
+       int ans=0;
+       int low=max;
+       int high=totalsum;
+       while(low<=high){
+        int sum=(low+high)/2;
+        int kcount=checksplit(nums,sum);
+        if(kcount<=k) {
+            high=sum-1;
+        }
+        else{
+            low=sum+1;
+        }
+       }
+       return low;
+    }
+    private static int checksplit(int[] nums,int sum){
+        int kcnt=1;
+        int indexsum=0;
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            if(indexsum+nums[i]<=sum){
+                indexsum+=nums[i];
+            }else{
+                kcnt++;
+                indexsum=nums[i];
+            }
+        }
+        return kcnt;
+    }
+}
