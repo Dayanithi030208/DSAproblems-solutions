@@ -1,3 +1,4 @@
+Approach1:
 package com.practice.demo;
 import java.util.*;
 public class AggressiveCows {
