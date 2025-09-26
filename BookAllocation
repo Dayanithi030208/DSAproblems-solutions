@@ -31,3 +31,53 @@ public class BookAllocation {
 	}
 }
 Approach 2:
+package com.practice.demo;
+
+import java.util.Scanner;
+
+public class BookAllocation {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter length of the array: ");
+		int n=sc.nextInt();
+		int[] nums=new int[n];
+		System.out.println("Enter the elements in the array :");
+		for(int i=0;i<n;i++) {
+			nums[i]=sc.nextInt();
+		}
+		int no_of_students=4;
+		int m=no_of_students;
+		if(n<m) {
+			System.out.println("Book Count is less than Student Count");
+			return ;
+		}
+		int totalsum=0;
+		int max=Integer.MIN_VALUE;
+		for(int num:nums) {
+			if(num>max) max=num;
+			totalsum+=num;
+		}
+		for(int pages=max;pages<=totalsum;pages++) {
+			int studentcount=isStudentCount(nums,pages);
+			if(studentcount==m) {
+				System.out.println(pages);
+				return ;
+			}
+		}
+		
+	}
+	private static int isStudentCount(int[] nums,int pages) {
+		int stdcnt=1;
+		int pagesholding=0;
+		int n=nums.length;
+		for(int i=0;i<n;i++) {
+			if(pagesholding+nums[i]<=pages) {
+				pagesholding+=nums[i];
+			}else {
+				stdcnt++;
+				pagesholding=nums[i];
+			}
+		}
+		return stdcnt;
+	}
+}
