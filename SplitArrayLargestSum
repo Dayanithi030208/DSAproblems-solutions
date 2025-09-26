@@ -1,0 +1,23 @@
+Approach 1:
+class Solution {
+    public int splitArray(int[] nums, int k) {
+        int split_index=0;
+        int n=nums.length;
+        int maxsplit=Integer.MIN_VALUE;
+        int minans=Integer.MAX_VALUE;
+        while(split_index<n-1){
+            int splitsum1=0;
+            for(int i=0;i<=split_index;i++){
+                splitsum1+=nums[i];
+            }
+            int splitsum2=0;
+            for(int i=split_index+1;i<n;i++){
+                splitsum2+=nums[i];
+            }
+            maxsplit=Math.max(splitsum1,splitsum2);
+            minans=(Math.min(minans,maxsplit));
+            split_index++;
+        }
+        return minans;
+    }
+}
