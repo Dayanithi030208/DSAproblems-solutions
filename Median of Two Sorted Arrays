@@ -1,0 +1,45 @@
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        // int len=nums1.length+nums2.length;
+        // int[] ans=new int[len];
+        // int a=0;
+        // double med=0;
+        // for(int i:nums1) ans[a++]=i;
+        // for(int i:nums2) ans[a++]=i;
+        // Arrays.sort(ans);
+        // if(len%2==0)
+        // {
+        //     med=(ans[len/2]+ans[(len/2)-1])/2.0;
+        // }
+        // else{
+        //     med=ans[len/2];
+        // }
+        // return med;
+        if(nums1.length>nums2.length) return findMedianSortedArrays(nums2,nums1);
+        int start=0;
+        int end=nums1.length;
+        int x=nums1.length;
+        int y=nums2.length;
+        double result=0;
+        while(start<=end){
+            int partionx=(start+end)/2;
+            int partiony=((x+y+1)/2)-partionx;
+            int maxleftx=(partionx==0)?Integer.MIN_VALUE:nums1[partionx-1];
+            int minrightx=(partionx==x)?Integer.MAX_VALUE:nums1[partionx];
+            int maxlefty=(partiony==0)?Integer.MIN_VALUE:nums2[partiony-1];
+            int minrighty=(partiony==y)?Integer.MAX_VALUE:nums2[partiony];
+            if(maxleftx<=minrighty&&maxlefty<=minrightx)
+            {
+                if((x+y)%2==0){
+                    return (Math.max(maxleftx,maxlefty)+Math.min(minrightx,minrighty))/2.0;
+                }
+                else{
+                    return (double)Math.max(maxleftx,maxlefty);
+                }
+            }
+            else if(maxleftx>minrighty) end=partionx-1;
+            else start=partionx+1;
+        }
+        return result;
+    }
+}
