@@ -1,3 +1,4 @@
+Approach 1:
 package com.practice.demo;
 
 public class MinMaxDistancetoGasStation {
@@ -31,5 +32,42 @@ public class MinMaxDistancetoGasStation {
 			maxAns=Math.max(maxAns, sectlen);
 		}
 		System.out.println(maxAns);
+	}
+}
+Approach 2:
+package com.practice.demo;
+import java.util.*;
+public class MinMaxDistancetoGasStation {
+	public static void main(String[] args) {
+		int[] arr1= {1,13,17,23};
+		int[] arr2= {1,2,3,4,5};
+		int k1=5;
+		int k2=4;
+		MinMaxDistance(arr1,k1);
+	}
+	static class segment{
+		double difference;
+		int index;
+		public segment(double difference,int index) {
+			this.difference=difference;
+			this.index=index;
+		}
+	}
+	private static void MinMaxDistance(int[] nums,int k) {
+		PriorityQueue<segment> pq=new PriorityQueue<>((a,b)->Double.compare(b.difference,a.difference));
+		int n=nums.length;
+		for(int i=0;i<n-1;i++) {
+			int diff=nums[i+1]-nums[i];
+			pq.offer(new segment(diff,i));
+		}
+		int[] howMany=new int[n-1];
+		for(int gasStation=1;gasStation<=k;gasStation++) {
+			int indx=pq.poll().index;
+			howMany[indx]++;
+			double diff=nums[indx+1]-nums[indx];
+			double seglen=diff/(howMany[indx]+1);
+			pq.offer(new segment(seglen,indx));
+		}
+		System.out.println(pq.peek().difference);
 	}
 }
