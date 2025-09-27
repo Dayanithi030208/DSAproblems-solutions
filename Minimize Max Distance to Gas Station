@@ -1,0 +1,35 @@
+package com.practice.demo;
+
+public class MinMaxDistancetoGasStation {
+	public static void main(String[] args) {
+		int[] arr1= {1,13,17,23};
+		int[] arr2= {1,2,3,4,5};
+		int k1=5;
+		int k2=4;
+		MinMaxDistance(arr2,k2);
+	}
+	private static void MinMaxDistance(int[] nums,int k) {
+		int n=nums.length;
+		int[] howMany=new int[n-1];
+		for(int gasStation=1;gasStation<=k;gasStation++) {
+			double maxsectlen=-1;
+			int maxind=-1;
+			for(int i=0;i<n-1;i++) {
+				int diff=nums[i+1]-nums[i];
+				double sectlen=diff/((double)howMany[i]+1);
+				if(sectlen>maxsectlen) {
+					maxsectlen=sectlen;
+					maxind=i;
+				}
+			}
+			howMany[maxind]++;
+		}
+		double maxAns=-1;
+		for(int i=0;i<n-1;i++) {
+			int diff=nums[i+1]-nums[i];
+			double sectlen=diff/((double)howMany[i]+1);
+			maxAns=Math.max(maxAns, sectlen);
+		}
+		System.out.println(maxAns);
+	}
+}
