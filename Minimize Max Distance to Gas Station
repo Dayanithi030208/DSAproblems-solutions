@@ -71,3 +71,51 @@ public class MinMaxDistancetoGasStation {
 		System.out.println(pq.peek().difference);
 	}
 }
+Approach 3:
+package com.practice.demo;
+import java.util.*;
+public class MinMaxDistancetoGasStation {
+	public static void main(String[] args) {
+		int[] arr1= {1,13,17,23};
+		int[] arr2= {1,2,3,4,5};
+		int k1=5;
+		int k2=4;
+		MinMaxDistance(arr1,k1);
+	}
+	
+	private static void MinMaxDistance(int[] nums,int k) {
+		int n=nums.length;
+		double maxdiff=0;
+		for(int i=0;i<n-1;i++) {
+			double diff=nums[i+1]-nums[i];
+			if(diff>maxdiff) {
+				maxdiff=diff;
+			}
+		}
+		double low=0;
+		double high=maxdiff;
+		double limit=1e-6;
+		while(high-low>limit) {
+			double mid=(low+high)/2.0;
+			int cnt=checkCount(nums,mid);
+			if(cnt>k) {
+				low=mid;
+			}else {
+				high=mid;
+			}
+		}
+		System.out.println(high);
+	}
+	private static int checkCount(int[] nums,double dist) {
+		int cnt=0;
+		int n=nums.length;
+		for(int i=0;i<n-1;i++) {
+			int inBetween=(int)((nums[i+1]-nums[i])/dist);
+//			if((nums[i+1]-nums[i])/dist==inBetween*dist) {
+//				inBetween--;
+//			}
+			cnt+=inBetween;
+		}
+		return cnt;
+	}
+}
