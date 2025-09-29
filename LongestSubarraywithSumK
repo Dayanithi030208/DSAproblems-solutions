@@ -1,0 +1,45 @@
+package com.practice.demo;
+
+public class LongestSubarrayWithSumK {
+	public static void main(String[] args) {
+		int[] nums= {1, 2, 1, 0, 1, 1, 0};
+		int n=nums.length;
+		int k=4;
+		int maxlen=0;
+		for(int i=0;i<n;i++) {
+			int sum=0;
+			int cnt=0;
+			for(int j=i;j<n;j++) {
+				sum+=nums[j];
+				if(sum<=k) {
+					cnt++;
+					maxlen=Math.max(maxlen, cnt);
+				}
+				else {
+					sum=nums[j];
+					cnt=1;
+				}
+				
+			}
+		}
+		System.out.println(maxlen);
+		slidingwindow(nums);
+	}
+	private static void slidingwindow(int[] nums) {
+		int n=nums.length;
+		int k=4;
+		int maxlen=0;
+		int i=0,j=0;
+		int sum=0;
+		while(j<n) {
+			sum+=nums[j];
+			while(sum>k) {
+				sum-=nums[i];
+				i++;
+			}
+			maxlen=Math.max(maxlen, j-i+1);
+			j++;
+		}
+		System.out.println(maxlen);
+	}
+}
