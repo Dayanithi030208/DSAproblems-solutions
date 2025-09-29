@@ -1,0 +1,23 @@
+package com.practice.demo;
+
+public class RowWithMaxOnes {
+	public static void main(String[] args) {
+		int[][] matrix= {{0,0,0},{0,1,1},{0,1,1}};
+		int row=matrix.length;
+		int col=matrix[0].length;
+		int maxcnt=0,rowans=-1;
+		for(int i=0;i<row;i++) {
+			int cnt=0;
+			for(int j=0;j<col;j++) {
+				if(matrix[i][j]==1) {
+					cnt++;
+				}
+			}
+			if(cnt>maxcnt) {
+				cnt=maxcnt;
+				rowans=i;
+			}
+		}
+		System.out.println(rowans);
+	}
+}
