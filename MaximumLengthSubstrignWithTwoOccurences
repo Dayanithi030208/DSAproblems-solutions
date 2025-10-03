@@ -1,0 +1,23 @@
+import java.util.HashMap;
+
+class Solution {
+    public int maximumLengthSubstring(String s) {
+        int left = 0;
+        int n = s.length();
+        int maxLen = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (int right = 0; right < n; right++) {
+            char rch = s.charAt(right);
+            map.put(rch, map.getOrDefault(rch, 0) + 1);
+            while (map.get(rch) > 2) {
+                char lch = s.charAt(left);
+                map.put(lch, map.get(lch) - 1);
+                left++;
+            }
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
+    }
+}
