@@ -1,34 +1,61 @@
-My approach and bruteforce
 class Solution {
     public int[] decrypt(int[] code, int k) {
-        int[] decrypt=new int[code.length];
-        int n=code.length;
-        if(k>0){
-            int index=0;
-            for(int i=0;i<code.length;i++){
-                int sum=0;
-                for(int j=i+1;j<=i+k;j++){
-                    if(j<code.length) sum+=code[j];
-                    else sum+=code[j-n];
-                }
-            decrypt[index++]=sum;    
-            }
+        // My approach and bruteforce 
+        // int[] decrypt=new int[code.length];
+        // int n=code.length;
+        // if(k>0){
+        //     int index=0;
+        //     for(int i=0;i<code.length;i++){
+        //         int sum=0;
+        //         for(int j=i+1;j<=i+k;j++){
+        //             if(j<code.length) sum+=code[j];
+        //             else sum+=code[j-n];
+        //         }
+        //     decrypt[index++]=sum;    
+        //     }
             
-        }
-        else if(k==0){
-            return decrypt;
-        }
-        else{
-            int index=0;
-            for(int i=0;i<code.length;i++){
-                int sum=0;
-                for(int j=i-1;j>=i+k;j--){
-                    if(j>=0) sum+=code[j];
-                    else sum+=code[n+j];
-                }
-            decrypt[index++]=sum;
-            }
+        // }
+        // else if(k==0){
+        //     return decrypt;
+        // }
+        // else{
+        //     int index=0;
+        //     for(int i=0;i<code.length;i++){
+        //         int sum=0;
+        //         for(int j=i-1;j>=i+k;j--){
+        //             if(j>=0) sum+=code[j];
+        //             else sum+=code[n+j];
+        //         }
+        //     decrypt[index++]=sum;
+        //     }
            
+        // }
+        // return decrypt;
+        // Optimal
+        int n=code.length;
+        int[] decrypt=new int[n];
+        if(k==0) return decrypt;
+        int[] extended=new int[2*n];
+        for(int i=0;i<extended.length;i++){
+            extended[i]=code[i%n];
+        }
+        int sum=0;
+        int start,end;
+        if(k>0){
+            start=1;
+            end=k;
+        }else{
+            start=n+k;
+            end=n-1;
+            k=-k;
+        }
+        for(int i=start;i<=end;i++){
+            sum+=code[i];
+        }
+        for(int i=0;i<n;i++){
+            decrypt[i]=sum;
+            sum-=extended[start++];
+            sum+=extended[++end];
         }
         return decrypt;
     }
