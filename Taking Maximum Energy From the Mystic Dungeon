@@ -1,0 +1,27 @@
+class Solution {
+    public int maximumEnergy(int[] energy, int k) {
+        // BRUTEFORCE O(N^2);
+        // int maxenergy=Integer.MIN_VALUE;
+        // int n=energy.length;
+        // for(int i=0;i<n;i++){
+        //     int nrg=0;
+        //     for(int j=i;j<n;j=j+k){
+        //         nrg+=energy[j];
+        //     }
+        //     maxenergy=Math.max(maxenergy,nrg);
+        // }
+        // return maxenergy;
+        // optimal
+        int n=energy.length;
+        int[] dp=new int[n];
+        for(int i=n-1;i>=0;i--){
+            if(i+k<n){
+                dp[i]=dp[i+k]+energy[i];
+            }
+            else dp[i]=energy[i];
+        }
+        int maxenergy=Integer.MIN_VALUE;
+        for(int num:dp) maxenergy=Math.max(maxenergy,num);
+        return maxenergy;
+    }
+}
