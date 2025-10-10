@@ -26,11 +26,6 @@ class Solution {
                 ans=num.substring(0,i+1);
                 return ans;
             }
-            else if(i==0){
-                if(number%2!=0){
-                String edge=num.substring(0,1);
-                return edge;}
-            }
         }
         return ans;
     }
