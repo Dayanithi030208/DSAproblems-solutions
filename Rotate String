@@ -1,0 +1,37 @@
+class Solution {
+    public boolean rotateString(String s, String goal) {
+        // Myapproach1
+        // StringBuilder sb=new StringBuilder();
+        // if(s.length()!=goal.length()) return false;
+        // char start=s.charAt(0);
+        // int index=goal.indexOf(start);
+        // int n=s.length();
+        // for(int i=index;i<index+n;i++){
+        //     sb.append(goal.charAt(i%n));
+        // }
+        // for(int i=0;i<n;i++){
+        //     if(s.charAt(i)!=sb.charAt(i)) return false;
+        // }
+        // return true;
+        // Myapproach2
+        if(s.length()!=goal.length()) return false;
+        StringBuilder sb=new StringBuilder();
+        char start=s.charAt(0);
+        int n=s.length();
+        for(int i=0;i<(2*n)-1;i++){
+            if(start==goal.charAt(i%n)){
+                int index=i;
+            for(int j=index;j<index+n;j++){
+            sb.append(goal.charAt(j%n));
+                }
+                int j=0;
+            for(;j<n;j++){
+            if(s.charAt(j)!=sb.charAt(j)) break;
+            }
+            if(j==n) return true;
+            sb.setLength(0);
+        }
+    }
+      return false;
+    }
+}
