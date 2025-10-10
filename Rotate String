@@ -14,24 +14,27 @@ class Solution {
         // }
         // return true;
         // Myapproach2
-        if(s.length()!=goal.length()) return false;
-        StringBuilder sb=new StringBuilder();
-        char start=s.charAt(0);
-        int n=s.length();
-        for(int i=0;i<(2*n)-1;i++){
-            if(start==goal.charAt(i%n)){
-                int index=i;
-            for(int j=index;j<index+n;j++){
-            sb.append(goal.charAt(j%n));
-                }
-                int j=0;
-            for(;j<n;j++){
-            if(s.charAt(j)!=sb.charAt(j)) break;
-            }
-            if(j==n) return true;
-            sb.setLength(0);
-        }
-    }
-      return false;
+    //     if(s.length()!=goal.length()) return false;
+    //     StringBuilder sb=new StringBuilder();
+    //     char start=s.charAt(0);
+    //     int n=s.length();
+    //     for(int i=0;i<(2*n)-1;i++){
+    //         if(start==goal.charAt(i%n)){
+    //             int index=i;
+    //         for(int j=index;j<index+n;j++){
+    //         sb.append(goal.charAt(j%n));
+    //             }
+    //             int j=0;
+    //         for(;j<n;j++){
+    //         if(s.charAt(j)!=sb.charAt(j)) break;
+    //         }
+    //         if(j==n) return true;
+    //         sb.setLength(0);
+    //     }
+    // }
+    //   return false;
+    if(s.length()!=goal.length()) return false;
+    String supersub=goal+goal;
+    return supersub.contains(s);
     }
 }
