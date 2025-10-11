@@ -1,0 +1,16 @@
+class Solution {
+    public int maximumStrongPairXor(int[] nums) {
+        int maxsumpair=0;
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            int sum=0;
+            for(int j=i;j<n;j++){
+                if(Math.abs(nums[i]-nums[j])<=Math.min(nums[i],nums[j])){
+                    int xorsum=nums[i]^nums[j];
+                    maxsumpair=Math.max(maxsumpair,xorsum);
+                }
+            }
+        }
+        return maxsumpair;
+    }
+}
