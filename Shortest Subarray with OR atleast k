@@ -1,0 +1,16 @@
+class Solution {
+    public int minimumSubarrayLength(int[] nums, int k) {
+        int ans=Integer.MAX_VALUE;
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            int orrvalue=0;
+            for(int j=i;j<n;j++){
+                orrvalue|=nums[j];
+                if(orrvalue>=k){
+                    ans=Math.min(ans,j-i+1);
+                }
+            }
+        }
+        return (ans!=Integer.MAX_VALUE)?ans:-1;
+    }
+}
