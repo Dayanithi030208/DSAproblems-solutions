@@ -1,0 +1,22 @@
+class Solution {
+    public String reverseVowels(String s) {
+        StringBuilder sb=new StringBuilder();
+        sb.append(s);
+        String vowels="aeiou";
+        int left=0;
+        int right=sb.length()-1;
+        while(left<right){
+            while(left<right&&!vowels.contains(Character.toString(Character.toLowerCase(s.charAt(left))))) left++;
+            while(left<right&&!vowels.contains(Character.toString(Character.toLowerCase(s.charAt(right))))) right--;
+            swap(sb,left,right);
+            left++;
+            right--;
+        }
+        return sb.toString();
+    }
+    private static void swap(StringBuilder sb,int left,int right){
+        char temp=sb.charAt(left);
+        sb.setCharAt(left,sb.charAt(right));
+        sb.setCharAt(right,temp);
+    }
+}
