@@ -1,0 +1,23 @@
+class Solution {
+    public int totalMoney(int n) {
+        int weeks=n/7;
+        int trv=weeks+1;
+        int days=n%7;
+        int total_money=0;
+        int j=1;
+        while(weeks!=0){
+            for(int i=j;i<j+7;i++){
+                total_money+=i;
+            }
+            j++;
+            weeks--;
+        }
+        if(days!=0){
+            for(int i=1;i<=days;i++){
+                total_money+=trv;
+                trv++;
+            }
+        }
+        return total_money;
+    }
+}
