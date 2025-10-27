@@ -1,0 +1,18 @@
+class Solution {
+    public int numberOfBeams(String[] bank) {
+        int total=0;
+        int prev=0;
+        for(String s:bank){
+            int count=0;
+            String sch=s;
+            for(int i=0;i<sch.length();i++){
+                if(sch.charAt(i)=='1') count++;
+            }
+            if(count>0){
+                total+=prev*count;
+                prev=count;
+            }
+        }
+        return total;
+    }
+}
