@@ -1,0 +1,11 @@
+class Solution {
+    public int smallestNumber(int n) {
+        if (n==1) return 1;
+        int j=0;
+        while(true){
+            if(Math.pow(2,j)>n) break;
+            j++;
+        }
+        return (int)Math.pow(2,j)-1;
+    }
+}
