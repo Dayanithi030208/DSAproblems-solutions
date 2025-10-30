@@ -1,0 +1,27 @@
+class Solution {
+    public int maxFreq(String s, int maxLetters, int minSize, int maxSize) {
+                HashMap<String,Integer> map=new HashMap<>();
+        int i=0;
+        while(i<s.length()){
+            int j=i;
+            HashSet<Character> set=new HashSet<>();
+            while(j<s.length()&&j<i+maxSize){
+                set.add(s.charAt(j));
+                int diffchar=set.size();
+                String sub=s.substring(i,j+1);
+                if(diffchar<=maxLetters&&sub.length()>=minSize&&sub.length()<=maxSize){
+                    map.put(sub,map.getOrDefault(sub,0)+1);
+                }
+                j++;
+            }
+            i++;
+        }
+        int max=0;
+        for(HashMap.Entry<String,Integer> entry:map.entrySet()){
+            if(entry.getValue()>=max){
+                max=entry.getValue();
+            }
+        }
+        return max; 
+    }
+}
