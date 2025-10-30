@@ -1,0 +1,62 @@
+class Solution {
+    public int beautySum(String s) {
+        // bruteforce
+    //     int n = s.length();
+    //     int beautysum = 0;
+
+    //     for (int i = 0; i < n; i++) {
+    //         for (int j = i; j < n; j++) {
+    //             int max = MaxFreq(s, i, j);
+    //             int min = MinFreq(s, i, j);
+    //             beautysum += (max - min);
+    //         }
+    //     }
+    //     return beautysum;
+    // }
+
+    // private static int MaxFreq(String s, int i, int j) {
+    //     HashMap<Character, Integer> map = new HashMap<>();
+    //     for (int k = i; k <= j; k++) {
+    //         map.put(s.charAt(k), map.getOrDefault(s.charAt(k), 0) + 1);
+    //     }
+    //     int max = 0;
+    //     for (int val : map.values()) {
+    //         max = Math.max(max, val);
+    //     }
+    //     return max;
+    // }
+
+    // private static int MinFreq(String s, int i, int j) {
+    //     HashMap<Character, Integer> map = new HashMap<>();
+    //     for (int k = i; k <= j; k++) {
+    //         map.put(s.charAt(k), map.getOrDefault(s.charAt(k), 0) + 1);
+    //     }
+    //     int min = Integer.MAX_VALUE;
+    //     for (int val : map.values()) {
+    //         min = Math.min(min, val);
+    //     }
+    //     return min;
+    // }
+    // optimal try 
+        int n = s.length();
+        int beautysum = 0;
+
+        for (int i = 0; i < n; i++) {
+            int[] charr=new int[26];
+            for (int j = i; j < n; j++) {
+              char ch=s.charAt(j);
+              charr[ch-'a']++;
+              int max=0;
+              int min=Integer.MAX_VALUE;
+              for(int k:charr){
+              if(k>0){
+                max=Math.max(k,max);
+                min=Math.min(k,min);
+              }
+              }  
+              beautysum+=(max-min);
+            }
+        }
+        return beautysum;
+    }
+}
