@@ -1,0 +1,46 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        ArrayList<List<String>> Ans = new ArrayList<>();
+        int length = strs.length;
+        int[] duplicatecheck = new int[length];
+
+        for (int i = 0; i < length; i++) {
+            if (duplicatecheck[i] == 1) continue;
+
+            String curr = strs[i];
+            ArrayList<String> group = new ArrayList<>();
+            group.add(curr);
+            duplicatecheck[i] = 1;
+
+            for (int j = i + 1; j < length; j++) {
+                if (duplicatecheck[j] == 1) continue;
+
+                String other = strs[j];
+                if (curr.length() == other.length() && AnagCheck(curr, other)) {
+                    group.add(other);
+                    duplicatecheck[j] = 1;
+                }
+            }
+            Ans.add(group);
+        }
+
+        return Ans;
+    }
+
+    private static boolean AnagCheck(String s, String t) {
+        if (s.length() != t.length()) return false;
+
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        for (char c : t.toCharArray()) {
+            if (!map.containsKey(c)) return false;
+            map.put(c, map.get(c) - 1);
+            if (map.get(c) < 0) return false;
+        }
+
+        return true;
+    }
+}
