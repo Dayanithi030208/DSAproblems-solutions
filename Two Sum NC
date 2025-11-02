@@ -1,0 +1,33 @@
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        // brute force
+        // 1 using two for loops to check all possible combinations wheter they are matching the target or not
+
+        int length=nums.length;
+        
+        // for (int i=0;i<length;i++){
+        //     for (int j=i+1;j<length;j++){
+        //         if(nums[i]+nums[j]==target) return new int[] {i,j};
+        //     }
+        // }
+
+        // return new int[] {0,0};
+
+        // time - O(N^2) space - O(1);
+
+        // optimal 
+        // 1 using hashmap to store the elements of the array 
+        // 2 and to find the remaining of the target - current ele will be present in the hashmap or not 
+
+        HashMap<Integer,Integer> map=new HashMap<>();
+        
+        for(int i=0;i<length;i++){
+            int remaining=target-nums[i];
+            if(map.containsKey(remaining)) return new int[] {map.get(remaining),i};
+            map.put(nums[i],i);
+        }
+
+        return new int[] {0,0};
+        // time - O(N) space - O(N)
+    }
+}
