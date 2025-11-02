@@ -1,0 +1,16 @@
+class Solution {
+    public boolean hasDuplicate(int[] nums) {
+        // 1. I am going to use hashset for storing the elements in the array
+        // 2. then i parellely check  wheteher the current element already present in the hashset or not 
+        // 3. if it present then return true otherwise after completion of all iterations return false
+        HashSet<Integer> set=new HashSet<>();
+
+        for(int num:nums){
+            if (set.contains(num)) return true;
+            set.add(num);
+        }
+
+        return false;
+        // time - O(N) space - O(N)
+    }
+}
