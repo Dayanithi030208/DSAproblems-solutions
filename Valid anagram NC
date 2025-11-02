@@ -1,0 +1,27 @@
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        // 1 I am going to use hashmap for counting the frequency 
+        // Anagram - frequency of character must be equal in the strings
+        // M1 : I used for each loop for string 
+        if (s.length()!=t.length()) return false;
+
+        HashMap<Character,Integer> map=new HashMap<>();
+        int length_s=s.length();
+        int length_t=t.length();
+
+        for(int i=0;i<length_s;i++){
+            char ch=s.charAt(i);
+            map.put(ch,map.getOrDefault(ch,0)+1);
+        }
+
+        for(int i=0;i<length_t;i++){
+            char ch=t.charAt(i);
+            if(!map.containsKey(ch)) return false;
+            map.put(ch,map.getOrDefault(ch,0)-1);
+            if(map.get(ch)<0) return false;
+        }
+
+        return true;
+        // time - O(N) space - O(N)
+    }
+}
