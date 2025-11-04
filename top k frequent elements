@@ -6,15 +6,14 @@ class Solution {
         for(int i=0;i<length;i++){
             map.put(nums[i],map.getOrDefault(nums[i],0)+1);
         }
-        ArrayList<HashMap.Entry<Integer,Integer>> list=new ArrayList<>();
+        ArrayList<Map.Entry<Integer,Integer>> list=new ArrayList<>(map.entrySet());
         Collections.sort(list, (a, b) -> b.getValue() - a.getValue());
         int top=k;
-        ArrayList<Integer> ans=new ArrayList<>(map.entrySet());
-        for(int i=0;i<list.size();i++){
-            top--;
-            ans.add(list.get(i));
+        ArrayList<Integer> ans=new ArrayList<>();
+        for(int i=0;i<top;i++){
+            ans.add(list.get(i).getKey());
         }
-        int[] arr=list.stream().mpaToInt(Integer::intValue).toArray();
+        int[] arr=ans.stream().mapToInt(Integer::intValue).toArray();
         return arr;
     }
 }
