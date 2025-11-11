@@ -1,0 +1,26 @@
+/*
+class ListNode {
+    int data;
+    ListNode prev, next;
+    ListNode(int val) {
+        this.data = val;
+        this.prev = null;
+        this.next = null;
+    }
+}
+*/
+
+class Solution {
+    public ListNode reverseDLL(ListNode head) {
+        // Your code goes here
+        ListNode temp1=head;
+        ListNode temp2=null;
+        while(temp1!=null){
+            temp1.prev=temp1.next;
+            temp1.next=temp2;
+            temp2=temp1;
+            temp1=temp1.prev;
+        }
+        return temp2;
+    }
+}
