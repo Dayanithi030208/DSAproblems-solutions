@@ -1,0 +1,22 @@
+    public class StringReversal {
+        // Approach1
+        // public static void main(String[] args) {
+        //     String ch="I Love You";
+        //     Reversal(0,ch);
+        // }
+        // private static void Reversal(int i, String ch){
+        //    if(i==ch.length()) return;
+        //    Reversal(i+1, ch);
+        //    System.out.print(ch.charAt(i));
+        // }
+        // Approach 2
+        public static void main(String[] args){
+            String ch="I love you";
+            String Reversed=Reverse(0,ch);
+            System.out.println(Reversed);
+        }
+        private static String Reverse(int i,String ch){
+            if(i==ch.length()) return "";
+            return Reverse(i+1,ch)+ch.charAt(i);
+        }
+    }
