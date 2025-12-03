@@ -1,0 +1,13 @@
+public class PalindromeRecursion {
+    public static void main(String[] args) {
+        String ch1="daya";
+        String ch2="madam";
+        System.out.println(palindrome(ch1,0,ch1.length()-1));
+        System.out.println(palindrome(ch2,0,ch2.length()-1));
+    }
+    private static boolean palindrome(String ch,int left,int right){
+        if(left>=right) return true;
+        if(ch.charAt(left)!=ch.charAt(right)) return false;
+        return palindrome(ch,left+1,right-1);
+    }
+}
