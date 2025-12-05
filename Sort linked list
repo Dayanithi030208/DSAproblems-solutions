@@ -1,0 +1,94 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode sortList(ListNode head) {
+        // /bruteforce
+        // ListNode newHead=null;
+        // ListNode temp=head;
+        // while(temp!=null){
+        //     ListNode newNode=new ListNode(temp.val);
+        //     if(newHead==null){
+        //         newHead=newNode;
+        //         temp=temp.next;
+        //         continue;
+        //     }
+        //     if(newNode.val<=newHead.val){
+        //         newNode.next=newHead;
+        //         newHead=newNode;
+        //     }else{
+        //         ListNode newTemp=newHead;
+        //         while(newTemp.next!=null){
+        //             if(newTemp.next.val>newNode.val){
+        //                 newNode.next=newTemp.next;
+        //                 newTemp.next=newNode;
+        //                 break;
+        //             }
+        //             newTemp=newTemp.next;
+        //         }
+        //         newTemp.next=newNode;
+        //     }
+        //     temp=temp.next;
+        // }
+        // return newHead;
+        // mergesort
+        // sortList - mergesort
+        if(head==null||head.next==null) return head;
+        ListNode mid=findMid(head);
+        ListNode left=head;
+        ListNode right=mid.next;
+        mid.next=null;
+        left=sortList(left);
+        right=sortList(right);
+        return merge(left,right);
+    }
+    private static ListNode findMid(ListNode head){
+        ListNode slow=head;
+        ListNode fast=head.next;
+        while(fast!=null&&fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+    private static ListNode merge(ListNode head1,ListNode head2){
+        ListNode t1=head1;
+        ListNode t2=head2;
+        ListNode dummy=new ListNode(0);
+        ListNode temp=dummy;
+        if(t1.val<t2.val){
+            dummy.next=t1;
+        }else{
+            dummy.next=t2;
+        }
+        while(t1!=null&&t2!=null){
+            if(t1.val<t2.val){
+                temp.next=t1;
+                temp=temp.next;
+                t1=t1.next;
+            }else{
+                temp.next=t2;
+                temp=temp.next;
+                t2=t2.next;
+            }
+        }
+        while(t1!=null){
+            temp.next=t1;
+            temp=temp.next;
+            t1=t1.next;
+        }
+        while(t2!=null){
+            temp.next=t2;
+            temp=temp.next;
+            t2=t2.next;
+        }
+        return dummy.next;
+    }
+}
