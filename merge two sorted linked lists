@@ -12,36 +12,46 @@
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
 
-        if (list1 == null) return list2;
-        if (list2 == null) return list1;
-        ListNode trv1 = list1;
-        ListNode trv2 = list2;
-        ListNode temp;   
-        ListNode head;  
-        if (trv1.val <= trv2.val) {
-            head = trv1;
-            trv1 = trv1.next;
-        } else {
-            head = trv2;
-            trv2 = trv2.next;
-        }
-        temp = head;
-        while (trv1 != null && trv2 != null) {
-            if (trv1.val <= trv2.val) {
-                temp.next = trv1;
-                trv1 = trv1.next;
-            } else {
-                temp.next = trv2;
-                trv2 = trv2.next;
-            }
-            temp = temp.next;
-        }
-        if (trv1 != null) {
-            temp.next = trv1;
-        } else if (trv2 != null) {
-            temp.next = trv2;
-        }
+        // if (list1 == null) return list2;
+        // if (list2 == null) return list1;
+        // ListNode trv1 = list1;
+        // ListNode trv2 = list2;
+        // ListNode temp;   
+        // ListNode head;  
+        // if (trv1.val <= trv2.val) {
+        //     head = trv1;
+        //     trv1 = trv1.next;
+        // } else {
+        //     head = trv2;
+        //     trv2 = trv2.next;
+        // }
+        // temp = head;
+        // while (trv1 != null && trv2 != null) {
+        //     if (trv1.val <= trv2.val) {
+        //         temp.next = trv1;
+        //         trv1 = trv1.next;
+        //     } else {
+        //         temp.next = trv2;
+        //         trv2 = trv2.next;
+        //     }
+        //     temp = temp.next;
+        // }
+        // if (trv1 != null) {
+        //     temp.next = trv1;
+        // } else if (trv2 != null) {
+        //     temp.next = trv2;
+        // }
 
-        return head;
+        // return head;
+        if(list1==null) return list2;
+        if(list2==null) return list1;
+        if(list1.val<list2.val){
+            list1.next=mergeTwoLists(list1.next,list2);
+            return list1;
+        }else{
+            list2.next=mergeTwoLists(list1,list2.next);
+            return list2;
+        }
+        }
     }
-}
+
