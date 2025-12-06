@@ -1,0 +1,139 @@
+import java.util.*;
+
+public class MedianOfTwoSortedArrays {
+    public static void main(String[] args) {
+        // Example 1
+        int[] a1 = {1, 3,7,9};
+        int[] b1 = {2,4,6,12};
+        System.out.println("Example 1 -> expected 5.0, got: " + findMedianSortedArrays(a1, b1));
+
+        // Example 2
+        int[] a2 = {1, 5,8,11};
+        int[] b2 = {2,4,6,7,9};
+        System.out.println("Example 2 -> expected 6, got: " + findMedianSortedArrays(a2, b2));
+
+        // Example 3 (both empty -> you can decide behavior)
+        int[] a3 = {};
+        int[] b3 = {};
+        System.out.println("Example 3 -> got: " + findMedianSortedArrays(a3, b3));
+
+        // If you prefer to run custom input from STDIN, uncomment below:
+        /*
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter n for first array:");
+        int n = sc.nextInt();
+        int[] arr1 = new int[n];
+        for (int i = 0; i < n; i++) arr1[i] = sc.nextInt();
+
+        System.out.println("Enter m for second array:");
+        int m = sc.nextInt();
+        int[] arr2 = new int[m];
+        for (int i = 0; i < m; i++) arr2[i] = sc.nextInt();
+
+        System.out.println("Median: " + findMedianSortedArrays(arr1, arr2));
+        sc.close();
+        */
+    }
+
+    /**
+     * TODO: Implement this method.
+     * Finds the median of two sorted arrays nums1 and nums2.
+     * Return type is double (to allow .5 medians).
+     *
+     * Constraints you may assume when implementing:
+     * - nums1 and nums2 are sorted in non-decreasing order
+     * - lengths may be zero
+     * - total length may be even or odd
+     */
+    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+
+    int len = nums1.length + nums2.length;
+    if (len == 0) return 0.0;
+
+    int trv = len / 2;
+    int i = 0, j = 0;
+    int midavg = 0;
+
+    while (i < nums1.length && j < nums2.length) {
+
+        if (len % 2 == 0) {         // even length
+            if (trv == 1) {
+                if (nums1[i] < nums2[j]) {
+                    midavg = nums1[i];
+                    i++; trv--;
+                    continue;
+                } else {
+                    midavg = nums2[j];
+                    j++; trv--;
+                    continue;
+                }
+            } else if (trv == 0) {
+                if (nums1[i] < nums2[j]) {
+                    midavg += nums1[i];
+                    return midavg / 2.0;
+                } else {
+                    midavg += nums2[j];
+                    return midavg / 2.0;
+                }
+            }
+        } 
+        else {   // odd length
+            if (trv == 0) {
+                if (nums1[i] < nums2[j]) {
+                    return nums1[i] / 1.0;
+                } else {
+                    return nums2[j] / 1.0;
+                }
+            }
+        }
+
+        if (nums1[i] < nums2[j]) i++;
+        else j++;
+
+        trv--;
+    }
+
+    // ================================
+    // ADD THIS TAIL HANDLING LOGIC ↓
+    // ================================
+
+    // nums1 leftovers
+    while (i < nums1.length) {
+        if (len % 2 == 0) {
+            if (trv == 1) {
+                midavg = nums1[i];
+                trv--; i++;
+                continue;
+            } else if (trv == 0) {
+                midavg += nums1[i];
+                return midavg / 2.0;
+            }
+        } else {
+            if (trv == 0) return nums1[i] / 1.0;
+        }
+        trv--;
+        i++;
+    }
+
+    // nums2 leftovers
+    while (j < nums2.length) {
+        if (len % 2 == 0) {
+            if (trv == 1) {
+                midavg = nums2[j];
+                trv--; j++;
+                continue;
+            } else if (trv == 0) {
+                midavg += nums2[j];
+                return midavg / 2.0;
+            }
+        } else {
+            if (trv == 0) return nums2[j] / 1.0;
+        }
+        trv--;
+        j++;
+    }
+
+    return 0.0;
+}
+
+}
