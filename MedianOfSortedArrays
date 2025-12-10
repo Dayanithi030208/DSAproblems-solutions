@@ -70,7 +70,7 @@ public class MedianOfSortedArrays {
                     return (Math.max(maxLeftX,maxLeftY)+Math.min(minRightX,minRightY))/2.0;
                 }
                 else{
-                    return Math.max(maxLeftX,maxLeftY);
+                    return Math.max(maxLeftX,maxLeftY)/1.0;
                 }
             }
         }
