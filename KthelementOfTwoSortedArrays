@@ -1,0 +1,90 @@
+import java.util.*;
+
+public class KthelementOfTwoSortedArrays {
+
+    public static void main(String[] args) {
+
+        // Example 1
+        int[] a1 = {2, 3, 6, 7, 9};
+        int[] b1 = {1, 4, 8, 10};
+        int k1 = 5;
+        System.out.println("Example 1 → expected: 6, got: " 
+            + findKthElement(a1, b1, k1));
+
+        // Example 2
+        int[] a2 = {100, 112, 256, 349, 770};
+        int[] b2 = {72, 86, 113, 119, 265, 445, 892};
+        int k2 = 7;
+        System.out.println("Example 2 → expected: 256, got: " 
+            + findKthElement(a2, b2, k2));
+
+        // Example 3
+        int[] a3 = {1, 2, 3};
+        int[] b3 = {4, 5, 6};
+        int k3 = 4;
+        System.out.println("Example 3 → expected: 4, got: " 
+            + findKthElement(a3, b3, k3));
+
+        // Custom input (uncomment if needed)
+        /*
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter n (size of array a): ");
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for(int i = 0; i < n; i++) a[i] = sc.nextInt();
+
+        System.out.print("Enter m (size of array b): ");
+        int m = sc.nextInt();
+        int[] b = new int[m];
+        for(int i = 0; i < m; i++) b[i] = sc.nextInt();
+
+        System.out.print("Enter k: ");
+        int k = sc.nextInt();
+
+        System.out.println("Kth Element = " + findKthElement(a, b, k));
+        sc.close();
+        */
+    }
+
+    /**
+     * TODO: Implement this method.
+     * Return the K-th smallest element from two sorted arrays.
+     *
+     * Constraints:
+     * - Arrays may be of different sizes
+     * - Arrays are sorted in ascending order
+     * - 1 <= k <= (a.length + b.length)
+     */
+    public static int findKthElement(int[] a, int[] b, int k) {
+
+        // ---------- WRITE YOUR LOGIC HERE ----------
+        int x=a.length;
+        int y=b.length;
+        if(x>y) return findKthElement(b, a, k);
+        int low=Math.max(0,k-y);
+        int high=Math.min(k,x);
+        while(low<=high){
+            int partionx=(low+high)/2;
+            int partiony=k-partionx;
+            int maxLeftX=(partionx==0)?Integer.MIN_VALUE:a[partionx-1];
+            int minRightX=(partionx==x)?Integer.MAX_VALUE:a[partionx];
+            int maxLeftY=(partiony==0)?Integer.MIN_VALUE:b[partiony-1];
+            int minRightY=(partiony==y)?Integer.MAX_VALUE:b[partiony];
+            if(maxLeftX<=minRightY&&maxLeftY<=minRightX){
+                return Math.max(maxLeftX,maxLeftY);
+            }else if(maxLeftX>minRightY) high=partionx-1;
+            else low=partionx+1;
+        }
+
+
+
+
+
+
+        // Placeholder return
+        return -1;
+
+        // ---------- END OF LOGIC ----------
+    }
+}
