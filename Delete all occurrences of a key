@@ -1,0 +1,31 @@
+public static Node deleteAllOccurrences(Node head, int target) {
+
+    Node temp = head;
+
+    while (temp != null) {
+
+        if (temp.data == target) {
+
+            // Case 1: deleting head
+            if (temp == head) {
+                head = head.next;
+                if (head != null) head.prev = null;
+            }
+
+            // Case 2: middle node (has both prev & next)
+            else if (temp.next != null) {
+                temp.prev.next = temp.next;
+                temp.next.prev = temp.prev;
+            }
+
+            // Case 3: deleting last node
+            else {
+                temp.prev.next = null;
+            }
+        }
+
+        temp = temp.next;
+    }
+
+    return head;
+}
