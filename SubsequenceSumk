@@ -1,0 +1,47 @@
+import java.util.*;
+
+public class SubsequenceSumK {
+
+    public static void main(String[] args) {
+
+        // Example input
+        int[] nums = {2,3,5,6,7,2,3,4,5};
+        int k = 7;
+
+        System.out.println("Subsequences with sum = " + k + ":");
+        findSubsequenceSum(0, nums, new ArrayList<>(), 0, k);
+    }
+
+    /**
+     * TODO: Implement this method.
+     *
+     * Print all subsequences whose sum equals k.
+     *
+     * Example:
+     * nums = [1,2,1], k = 2
+     * Output:
+     * [1,1]
+     * [2]
+     */
+    public static void findSubsequenceSum(int index,
+                                          int[] nums,
+                                          List<Integer> current,
+                                          int sum,
+                                          int k) {
+
+        // -------- WRITE YOUR LOGIC HERE ----------
+        if(index>=nums.length){
+            if(sum==k){
+                System.out.println(current);
+            }
+            return ;
+        }
+        current.add(nums[index]);
+        sum+=nums[index];
+        findSubsequenceSum(index+1,nums,current,sum,k);
+        sum-=current.get(current.size()-1);
+        current.remove(current.size()-1);
+        findSubsequenceSum(index+1,nums,current,sum,k);
+        // -------- END OF LOGIC -------------------
+    }
+}
