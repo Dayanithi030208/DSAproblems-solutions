@@ -1,0 +1,23 @@
+Approach 1:
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Set<List<Integer>> Ans=new HashSet();
+        findCombinationSum(candidates,0,target,Ans,new ArrayList<Integer>());
+        List<List<Integer>> AnsList=new ArrayList<>(Ans);
+        return AnsList;
+    }
+    public static void findCombinationSum(int[] nums,int index,int k,Set<List<Integer>> Ans,List<Integer> TraversalList){
+            if(index>=nums.length){
+                if(k==0){
+                    List<Integer> temp = new ArrayList<>(TraversalList);
+                    Collections.sort(temp);
+                    Ans.add(temp);
+                }
+                return ;
+            }
+            TraversalList.add(nums[index]);
+            findCombinationSum(nums,index+1,k-nums[index],Ans,TraversalList);
+            TraversalList.removeLast();
+            findCombinationSum(nums,index+1,k,Ans,TraversalList);
+        }
+}
