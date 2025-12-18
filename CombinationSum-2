@@ -21,3 +21,37 @@ class Solution {
             findCombinationSum(nums,index+1,k,Ans,TraversalList);
         }
 }
+Approach 2 :
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        // Set<List<Integer>> Ans=new HashSet();
+        Arrays.sort(candidates);
+        List<List<Integer>> Ans = new ArrayList<>();
+        findCombinationSum(candidates,0,target,Ans,new ArrayList<Integer>());
+        // List<List<Integer>> AnsList=new ArrayList<>(Ans);
+        // return AnsList;
+        return Ans;
+    }
+    public static void findCombinationSum(int[] nums,int index,int k,List<List<Integer>> Ans,List<Integer> TraversalList){
+            // if(index>=nums.length){
+                if(k==0){
+                    // List<Integer> temp = new ArrayList<>(TraversalList);
+                    // Collections.sort(temp);
+                    // Ans.add(temp);
+                    Ans.add(new ArrayList<>(TraversalList));
+                    return ;
+                }
+            // }
+            // TraversalList.add(nums[index]);
+            // findCombinationSum(nums,index+1,k-nums[index],Ans,TraversalList);
+            // TraversalList.removeLast();
+            // findCombinationSum(nums,index+1,k,Ans,TraversalList);
+            for(int i=index;i<nums.length;i++){
+                if(i>index&&nums[i]==nums[i-1]) continue;
+                if(nums[i]>k) break;
+            TraversalList.add(nums[i]);
+            findCombinationSum(nums,i+1,k-nums[i],Ans,TraversalList);
+            TraversalList.removeLast();
+            }
+        }
+}
