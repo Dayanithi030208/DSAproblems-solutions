@@ -1,0 +1,29 @@
+class Solution {
+    public ArrayList<String> findPermutation(String s) {
+        // Code here
+        int[] map = new int[s.length()];
+        char[] arr=s.toCharArray();
+        Arrays.sort(arr);
+        s=new String(arr);
+        ArrayList<String> Ans=new ArrayList<String>();
+        findAllPermutations(s,map,new StringBuilder(),Ans);
+        return Ans;
+    }
+    public static void findAllPermutations(String s,int[] map,StringBuilder sb,ArrayList<String> Ans){
+        if(sb.length()==s.length()){
+            String new_s=sb.toString();
+            Ans.add(new_s);
+            return ;
+        }
+        for(int i=0;i<s.length();i++){
+            if(i>0&&s.charAt(i)==s.charAt(i-1)&&map[i-1]==0) continue;
+            if(map[i]!=1){
+                sb.append(s.charAt(i));
+                map[i]=1;
+                findAllPermutations(s,map,sb,Ans);
+                map[i]=0;
+                sb.setLength(sb.length()-1);
+            }
+        }
+    }
+}
