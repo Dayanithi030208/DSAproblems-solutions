@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        int[] map=new int[nums.length];
+        List<List<Integer>> Ans=new ArrayList<>();
+        findAllPermutations(nums,map,new ArrayList<>(),Ans);
+        return Ans;
+    }
+    public static void findAllPermutations(int[] nums,int[] map,List<Integer> TravelList,List<List<Integer>> Ans){
+        if(TravelList.size()==nums.length){
+            Ans.add(new ArrayList<>(TravelList));
+            return ;
+        }
+        for(int i=0;i<nums.length;i++){
+            if(map[i]!=1){
+                TravelList.add(nums[i]);
+                map[i]=1;
+                findAllPermutations(nums,map,TravelList,Ans);
+                map[i]=0;
+                TravelList.removeLast();
+            }
+        }
+    }
+}
