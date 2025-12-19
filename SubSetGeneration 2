@@ -1,0 +1,23 @@
+import java.util.*;
+
+public class SubSetGeneration2 {
+
+    public static void main(String[] args) {
+
+        // Example input
+        int[] nums = {1, 2, 2};
+        List<List<Integer>> Ans = new ArrayList<>();
+        findsubsets(0,nums,new ArrayList<>(),Ans);
+        System.out.println(Ans);
+    }
+
+    public static void findsubsets(int index,int[] nums,List<Integer> TravelList,List<List<Integer>> Ans) {
+        Ans.add(new ArrayList<>(TravelList));
+        for(int i=index;i<nums.length;i++){
+            if(index<i&&nums[i]==nums[i-1]) continue;
+            TravelList.add(nums[i]);
+            findsubsets(i+1,nums,TravelList,Ans);
+            TravelList.removeLast();
+        }
+    }
+}
