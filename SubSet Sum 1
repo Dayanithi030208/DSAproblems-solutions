@@ -1,0 +1,21 @@
+class Solution {
+    public List<Integer> subsetSums(int[] nums) {
+        //your code goes here
+        List<Integer> result = new ArrayList<>();
+
+        // Call the recursive function
+        findAllSums(0, nums, 0, result);
+        return result;
+    }
+    public static void findAllSums(int index,
+                                   int[] nums,
+                                   int currentSum,
+                                   List<Integer> result) {
+        result.add(currentSum);
+        for(int i=index;i<nums.length;i++){
+            currentSum+=nums[i];
+            findAllSums(i+1,nums,currentSum,result);
+            currentSum-=nums[i];
+        }
+    }
+}
