@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class PartitionPalindromicSubstring {
+    public static void main(String[] args){
+        String s="aabb";
+        List<List<String>> Ans=new ArrayList<>();
+        findPartionsOfString(s,new ArrayList<String>(),Ans,0);
+        System.out.println(Ans);
+    }
+    public static void findPartionsOfString(String s,List<String> TravelList,List<List<String>> Ans,int index){
+        if(index==s.length()){
+            Ans.add(new ArrayList<>(TravelList));
+            return ;
+        }
+        for(int i=index;i<s.length();i++){
+            if(isPalindrome(s,index,i)){
+                TravelList.add(s.substring(index,i+1));
+                findPartionsOfString(s,TravelList,Ans,i+1);
+                TravelList.removeLast();
+            }
+        }
+    }
+    private static boolean isPalindrome(String s,int start,int end){
+        int i=start;
+        int j=end;
+        while(i<=j){
+            if(s.charAt(i)!=s.charAt(j)) return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+}
