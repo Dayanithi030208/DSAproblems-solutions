@@ -1,0 +1,96 @@
+class TrieNode{
+    TrieNode[] children=new TrieNode[26];
+    int WordCount=0;
+    int PrefixCount=0;
+    boolean EndOfTheWord=false;
+}
+class Trie{
+    private TrieNode root;
+    public Trie(){
+        root = new TrieNode();
+    }
+    public void insert(String s){
+        TrieNode node=root;
+        for(char ch:s.toCharArray()){
+            int index=ch-'a';
+            if(node.children[index]==null){
+                node.children[index]=new TrieNode();
+            }
+            node=node.children[index];
+            node.PrefixCount++;
+        }
+        node.WordCount++;
+        node.EndOfTheWord=true;
+    }
+    public void erase(String s){
+        if(!search(s)) return ;
+        TrieNode node=root;
+        for(char ch:s.toCharArray()){
+            int index=ch-'a';
+            node=node.children[index];
+            node.PrefixCount--;
+        }
+        node.WordCount--;
+        if(node.WordCount==0) node.EndOfTheWord=false;
+    }
+    public boolean search(String s){
+        TrieNode node=root;
+        for(char ch:s.toCharArray()){
+            int index=ch-'a';
+            if(node.children[index]==null) return false;
+            else node=node.children[index];
+        }
+        return node.EndOfTheWord;
+    }
+    public boolean StartsWith(String s){
+        TrieNode node=root;
+        for(char ch:s.toCharArray()){
+            int index=ch-'a';
+            if(node.children[index]==null) return false;
+            else node=node.children[index];
+        }
+        return true;
+    }
+    public int countWords(String s){
+        TrieNode node=root;
+        for(char ch:s.toCharArray()){
+            int index=ch-'a';
+            if(node.children[index]==null) return -1;
+            else node=node.children[index];
+        }
+        return node.WordCount;
+    }
+    public int countPrefix(String s){
+        TrieNode node=root;
+        for(char ch:s.toCharArray()){
+            int index=ch-'a';
+            if(node.children[index]==null) return -1;
+            else node=node.children[index];
+        }
+        return node.PrefixCount;
+    }
+}
+public class TriePractice2 {
+    public static void main(String[] args){
+                Trie trie = new Trie();
+
+        trie.insert("apple");
+        trie.insert("apple");
+        trie.insert("apps");
+        trie.insert("apps");
+        System.out.println(trie.search("apple"));
+        System.out.println(trie.StartsWith("app"));
+        System.out.println(trie.search("bat"));
+        System.out.println(trie.StartsWith("apc"));
+        System.out.println(trie.countPrefix("ap"));
+        System.out.println(trie.countWords("apple"));
+        trie.erase("apps");
+        System.out.println(trie.countWords("apps"));
+        trie.erase("ap");
+        System.out.println(trie.countPrefix("ap"));
+        trie.erase("apps");
+        System.out.println(trie.search("apps"));
+        System.out.println(trie.countPrefix("ap"));
+        System.out.println(trie.countWords("apps"));
+    }
+}
