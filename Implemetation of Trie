@@ -1,0 +1,56 @@
+class TrieNode{
+    TrieNode[] children=new TrieNode[26];
+    boolean EndOfWord=false;
+}
+class Trie{
+    private TrieNode root;
+     public Trie(){
+        root=new TrieNode();
+    }
+    public void insert(String s){
+        TrieNode node=root;
+        for(char ch:s.toCharArray()){
+            int index=ch-'a';
+            if(node.children[index]==null){
+                node.children[index]=new TrieNode();
+            }
+            node = node.children[index];
+        }
+        node.EndOfWord=true;
+    }
+    public boolean search(String s){
+        TrieNode node=root;
+        for(char ch:s.toCharArray()){
+            int index=ch-'a';
+            if(node.children[index]==null) return false;
+            else node=node.children[index];
+        }
+        return node.EndOfWord;
+    }
+    public boolean StartsWith(String s){
+        TrieNode node=root;
+        for(char ch:s.toCharArray()){
+            int index=ch-'a';
+            if(node.children[index]==null) return false;
+            else node=node.children[index];
+        }
+        return true;
+    }
+}
+public class TriePractice {
+    public static void main(String[] args) {
+        Trie trie = new Trie();
+
+        trie.insert("apple");
+        trie.insert("apps");
+        trie.insert("apxl");
+        trie.insert("bat");
+        trie.insert("bac");
+        System.out.println(trie.search("apps"));     // true
+        System.out.println(trie.search("apple"));
+        System.out.println(trie.search("ap"));     // true
+        System.out.println(trie.search("cat"));
+        System.out.println(trie.StartsWith("ap"));
+
+    }
+}
