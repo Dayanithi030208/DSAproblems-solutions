@@ -1,0 +1,116 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+class Node{
+    int data;
+    Node left,right;
+    Node(int data){
+        this.data=data;
+        left=right=null;
+    }
+}
+class BinaryTree{
+    Node root;
+    public void insertNode(int data){
+        Node newnode=new Node(data);
+        if(root==null){
+            root=newnode;
+            return;
+        }
+        Queue<Node> q=new LinkedList<>();
+        q.add(root);
+        int k=1;
+        while(!q.isEmpty()){
+            Node temp=q.poll();
+            if(temp.left==null){
+                temp.left=newnode;
+                return;
+            }else{
+                q.add(temp.left);
+            }
+            if(temp.right==null){
+                temp.right=newnode;
+                return ;
+            }
+            else{
+                q.add(temp.right);
+            }
+        }
+    }
+    public void displayLevelOrder(){
+        if(root==null){
+            System.out.println("Nothing");
+            return ;
+        }
+        Queue<Node> q=new LinkedList<>();
+        q.add(root);
+        int k=1;
+        while(!q.isEmpty()){
+            Node temp=q.poll();
+            System.out.print(temp.data+" --- ");
+            k--;
+            if(temp.left!=null) q.add(temp.left);
+            if(temp.right!=null) q.add(temp.right);
+            if(k==0){
+                System.out.println("|");
+                System.out.println("|");
+                k=q.size();
+            }
+        }
+    }
+    public void inOrderTraversal(Node node){
+        if(node==null) return;
+        inOrderTraversal(node.left);
+        System.out.print(node.data+" - >");
+        inOrderTraversal(node.right);
+    }
+    public void preOrderTraversal(Node node){
+        if(node==null) return ;
+        System.out.print(node.data+" -> ");
+        preOrderTraversal(node.left);
+        preOrderTraversal(node.right);
+    }
+    public void postOrderTraversal(Node node){
+        if(node==null) return ;
+        postOrderTraversal(node.left);
+        postOrderTraversal(node.right);
+        System.out.print(node.data+" -> ");
+    }
+    public boolean search(int target){
+        if(root==null){
+            System.out.println("Nothing");
+            return false;
+        }
+        Queue<Node> q=new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            Node temp=q.poll();
+            if(temp.data==target) return true;
+            if(temp.left!=null) q.add(temp.left);
+            if(temp.right!=null) q.add(temp.right);
+        }
+        return false;
+    }
+}
+public class BinaryTreePractice2 {
+    public static void main(String[] args) {
+        BinaryTree bt=new BinaryTree();
+        bt.displayLevelOrder();
+        bt.insertNode(9);
+        bt.insertNode(3);
+        bt.insertNode(4);
+        bt.insertNode(5);
+        bt.insertNode(6);
+        bt.insertNode(7);
+        bt.insertNode(8);
+        bt.displayLevelOrder();
+        bt.inOrderTraversal(bt.root);
+        System.out.println();
+        bt.preOrderTraversal(bt.root);
+        System.out.println();
+        bt.postOrderTraversal(bt.root);
+        System.out.println();
+        System.out.println(bt.search(1));
+        System.out.println(bt.search(3));
+    }
+}
