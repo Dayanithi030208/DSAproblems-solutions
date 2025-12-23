@@ -1,0 +1,82 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+class Tree{
+    Tree left;
+    int data;
+    Tree right;
+    Tree(){
+
+    }
+    Tree(int data){
+        this.data=data;
+    }
+}
+class BinaryTree{
+    public Tree root;
+//    BinaryTree(){
+//        root=new Tree();
+//    }
+    public void insert(int data){
+        Tree node=root;
+        Tree newnode=new Tree(data);
+        if(node==null){
+            root=newnode;
+            return ;
+        }
+        int directionChanger=0;
+        while(true){
+            if(node.left==null) {
+                node.left=newnode;
+                return ;
+            }
+            if(node.right==null){
+                node.right=newnode;
+                return ;
+            }
+            if(directionChanger==0){
+                node=node.left;
+                directionChanger=1;
+            }else{
+                node = node.right;
+                directionChanger=0;
+            }
+        }
+    }
+    public void display(){
+        Tree node=root;
+        if(node==null) {
+            System.out.println("Nothing");
+            return;
+        }
+        Queue<Tree> q=new LinkedList<>();
+        q.add(node);
+        int k=1;
+        while(!q.isEmpty()){
+            Tree curr=q.poll();
+            k--;
+            System.out.print(curr.data+"->");
+            if(curr.left!=null) q.add(curr.left);
+            if(curr.right!=null) q.add(curr.right);
+            if(k==0){
+                System.out.println();
+                k=q.size();
+            }
+        }
+    }
+}
+public class BinaryTreePractice {
+    public static void main(String[] args){
+        BinaryTree bt=new BinaryTree();
+        bt.insert(7);
+        bt.insert(7);
+        bt.insert(0);
+        bt.insert(0);
+        bt.insert(6);
+        bt.insert(5);
+        bt.insert(4);
+        bt.insert(3);
+        bt.insert(9);
+        bt.display();
+    }
+}
