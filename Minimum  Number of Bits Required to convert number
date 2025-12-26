@@ -1,0 +1,16 @@
+class Solution {
+    public int minBitsFlip(int start, int goal) {
+        //your code goes here
+        int s=start;
+        int g=goal;
+        int count=0;
+        int loopiterator=(start>goal)?start:goal;
+        while(loopiterator>0){
+            if((s&1)!=(g&1)) count++;
+            s=s>>1;
+            g=g>>1;
+            loopiterator=loopiterator/2;
+        }
+        return count;
+    }
+}
