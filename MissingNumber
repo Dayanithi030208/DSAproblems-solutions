@@ -1,0 +1,16 @@
+class Solution {
+    public int missingNumber(int[] nums) {
+        // int n=nums.length;
+        // int summat=(n*(n+1))/2;
+        // int sumcal=0;
+        // for(int i:nums) sumcal+=i;
+        // return summat-sumcal;
+        int xor1=0;
+        int xor2=0;
+        for(int i=0;i<nums.length;i++){
+            xor1^=(i+1);
+            xor2^=(nums[i]);
+        }
+        return xor1^xor2;
+    }
+}
