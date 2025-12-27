@@ -1,0 +1,22 @@
+class Solution {
+    public int divide(int dividend, int divisor) {
+        if(dividend==Integer.MIN_VALUE&&divisor==-1) return Integer.MAX_VALUE;
+        if(dividend==divisor) return 1;
+        if(divisor==0) return Integer.MAX_VALUE;
+        long divid=Math.abs((long)dividend);
+        long divis=Math.abs((long)divisor);
+        int ans=0;
+        boolean sign=true;
+        if(divisor<0&&dividend>0) sign = false;
+        if(divisor>0&&dividend<0) sign = false;
+        while(divid>=divis){
+            int i=0;
+            while(divid>=(divis<<(i+1))){
+                i++;
+            }
+            ans+=(1<<i);
+            divid=divid-(divis<<i);
+        }
+        return sign?ans:-ans;
+    }
+}
