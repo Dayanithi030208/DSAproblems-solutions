@@ -1,0 +1,70 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists.length==0) return null;
+        // ArrayList<Integer> nodeList=new ArrayList<>();
+        // for(int i=0;i<lists.length;i++){
+        //     ListNode head=lists[i];
+        //     if(head==null) continue;
+        //     ListNode temp=head;
+        //     while(temp!=null){
+        //         nodeList.add(temp.val);
+        //         temp=temp.next;
+        //     }
+        // }
+        // Collections.sort(nodeList);
+        // ListNode dummynode=new ListNode(-1);
+        // ListNode temp=dummynode;
+        // for(int i=0;i<nodeList.size();i++){
+        //     int data=nodeList.get(i);
+        //     ListNode newnode=new ListNode(data);
+        //     temp.next=newnode;
+        //     temp=temp.next;
+        // }
+        // return dummynode.next;
+        // ListNode head=null;
+        // if(lists[0]!=null) {
+        //     head=lists[0];
+        // }
+        // for(int i=1;i<lists.length;i++){
+        //     if(lists[i]==null) continue;
+        //     head=mergeLists(head,lists[i]);
+        // }
+        // return head;
+        PriorityQueue<ListNode> topKQueue=new PriorityQueue<>((a,b)->a.val-b.val);
+        for(ListNode headOfList:lists){
+            if(headOfList!=null){
+                topKQueue.add(headOfList);
+            }
+        }
+        ListNode dummy=new ListNode(-1);
+        ListNode current=dummy;
+        while(!topKQueue.isEmpty()){
+            ListNode node=topKQueue.poll();
+            current.next=node;
+            current=current.next;
+            if(node.next!=null) topKQueue.add(node.next);
+        }
+        return dummy.next;
+    }
+    // public ListNode mergeLists(ListNode list1,ListNode list2){
+    //     if(list1==null) return list2;
+    //     if(list2==null) return list1;
+    //     if(list1.val<=list2.val){
+    //         list1.next=mergeLists(list1.next,list2);
+    //         return list1;
+    //     }else{
+    //         list2.next=mergeLists(list1,list2.next);
+    //         return list2;
+    //     }
+    // }
+}
