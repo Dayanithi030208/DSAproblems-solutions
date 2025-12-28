@@ -10,26 +10,39 @@
  */
 class Solution {
     public ListNode oddEvenList(ListNode head) {
-        if(head==null||head.next==null||head.next.next==null) return head;
-       ListNode start=head.next;
-       ListNode odd=head;
-       ListNode even=head.next;
-       while(odd.next.next!=null&&even.next.next!=null){
-        odd.next=even.next;
-        even.next=even.next.next;
-        odd=odd.next;
-        even=even.next;
-       }
-       if(odd.next.next==null){
-        odd.next=start;
-        return head;
-       }
-       else{
-        odd.next=even.next;
-        even.next=null;
-        odd=odd.next;
-        odd.next=start;
-        return head;
-       }
+    //     if(head==null||head.next==null||head.next.next==null) return head;
+    //    ListNode start=head.next;
+    //    ListNode odd=head;
+    //    ListNode even=head.next;
+    //    while(odd.next.next!=null&&even.next.next!=null){
+    //     odd.next=even.next;
+    //     even.next=even.next.next;
+    //     odd=odd.next;
+    //     even=even.next;
+    //    }
+    //    if(odd.next.next==null){
+    //     odd.next=start;
+    //     return head;
+    //    }
+    //    else{
+    //     odd.next=even.next;
+    //     even.next=null;
+    //     odd=odd.next;
+    //     odd.next=start;
+    //     return head;
+    //    }
+    if(head==null||head.next==null||head.next.next==null) return head;
+        ListNode oneHead=head;
+        ListNode twoHead=head.next;
+        ListNode ones=head;
+        ListNode twos=head.next;
+        while(twos!=null){
+            ones.next=ones.next.next;
+            if(twos.next!=null) twos.next=twos.next.next;
+            if(ones.next!=null) ones=ones.next;
+            twos=twos.next;
+        }
+        ones.next=twoHead;
+        return oneHead;
     }
 }
