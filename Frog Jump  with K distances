@@ -1,0 +1,22 @@
+class Solution {
+    public int frogJump(int[] heights, int k) {
+        int[] memo=new int[heights.length];
+        Arrays.fill(memo,-1);
+        return findMinEnergy(heights,memo,k,heights.length-1);
+    }
+    public int findMinEnergy(int[] heights,int[] memo,int k,int n){
+        if(n==0) return 0;
+        if(memo[n]!=-1) return memo[n];
+        int MinEnergy=Integer.MAX_VALUE;
+        for(int i=1;i<=k;i++){
+            if(n-i>=0){
+                int jump=findMinEnergy(heights,memo,k,n-i)+Math.abs(heights[n]-heights[n-i]);
+                MinEnergy=Math.min(MinEnergy,jump);
+            }else{
+                break;
+            }
+        }
+        memo[n]=MinEnergy;
+        return memo[n];
+    }
+}
