@@ -1,0 +1,27 @@
+class Solution {
+    public int uniquePathsWithObstacles(int[][] matrix) {
+        int m=matrix.length;
+        int n=matrix[0].length;
+        int[][] memo = new int[m][n];
+        for(int[] row:memo){
+            Arrays.fill(row,0);
+        }
+        return countUniquePaths(memo,m-1,n-1,matrix);
+    }
+    private int countUniquePaths(int[][] memo, int i,int j,int[][] matrix){
+        if(i==0&&j==0){
+            if(matrix[i][j]!=1){
+                memo[i][j]=1;
+            return memo[i][j];
+            }
+        }
+        if(memo[i][j]!=0) return memo[i][j];
+        if(i>0&&matrix[i][j]!=1){
+            memo[i][j]+=countUniquePaths(memo,i-1,j,matrix);
+        }
+        if(j>0&&matrix[i][j]!=1){
+            memo[i][j]+=countUniquePaths(memo,i,j-1,matrix);
+        }
+        return memo[i][j];
+    }
+}
