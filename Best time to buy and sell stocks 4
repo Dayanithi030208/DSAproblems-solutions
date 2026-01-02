@@ -1,0 +1,29 @@
+class Solution {
+    public int maxProfit(int k, int[] prices) {
+        int m=prices.length;
+        int[][][] memo=new int[m][2][k+1];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<2;j++){
+                Arrays.fill(memo[i][j],-1);
+            }
+        }
+        return findMaxProfit(prices,memo,0,1,k);
+    }
+    private int findMaxProfit(int[] prices ,int[][][] memo,int day,int buy,int cap){
+        int m=prices.length;
+        if(cap==0) return 0;
+        if(day==m) return 0;
+        if(memo[day][buy][cap]!=-1) return memo[day][buy][cap];
+        if(buy==1){
+            int buyed=-prices[day]+findMaxProfit(prices,memo,day+1,0,cap);
+            int notbuyed=findMaxProfit(prices,memo,day+1,1,cap);
+            memo[day][buy][cap]=Math.max(buyed,notbuyed);
+        }
+        else{
+            int sold=prices[day]+findMaxProfit(prices,memo,day+1,1,cap-1);
+            int notsold=findMaxProfit(prices,memo,day+1,0,cap);
+            memo[day][buy][cap]=Math.max(sold,notsold);
+        }
+        return memo[day][buy][cap];
+    }
+}
