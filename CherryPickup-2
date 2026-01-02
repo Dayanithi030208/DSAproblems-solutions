@@ -1,0 +1,27 @@
+private int findCherryByRobot(int[][] grid,int[][][] memo,int row,int col1,int col2){
+        int m=grid.length;
+        int n=grid[0].length;
+        if(col1<0||col1>=n||col2<0||col2>=n) return Integer.MIN_VALUE;
+        if(row==m-1){
+            if(col1==col2) return grid[row][col1];
+            else return grid[row][col1]+grid[row][col2];
+        }
+        if(memo[row][col1][col2]!=-1){
+            return memo[row][col1][col2];
+        }
+        int max=Integer.MIN_VALUE;
+        for(int d1=-1;d1<=1;d1++){
+            for(int d2=-1;d2<=1;d2++){
+                int next=findCherryByRobot(grid,memo,row+1,col1+d1,col2+d2);
+                max=Math.max(max,next);
+            }
+        }
+        int cherries;
+        if(col1==col2){
+            cherries=grid[row][col1];
+        }else{
+            cherries=grid[row][col1]+grid[row][col2];
+        }
+        memo[row][col1][col2]=cherries+max;
+        return memo[row][col1][col2];
+    }
