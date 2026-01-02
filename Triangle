@@ -1,0 +1,20 @@
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int m=triangle.size();
+        int[][] memo=new int[m][m];
+        for(int[] row:memo){
+            Arrays.fill(row,Integer.MAX_VALUE);
+        }
+        return minimumFallingPath(triangle,memo,0,0);
+    }
+    private int minimumFallingPath(List<List<Integer>> triangle,int[][] memo,int row,int col){
+        if(row==triangle.size()-1){
+            return triangle.get(row).get(col);
+        }
+        if(memo[row][col]!=Integer.MAX_VALUE) return memo[row][col];
+        int bottom=minimumFallingPath(triangle,memo,row+1,col);
+        int diagonal=minimumFallingPath(triangle,memo,row+1,col+1);
+        memo[row][col]=triangle.get(row).get(col)+Math.min(bottom,diagonal);
+        return memo[row][col];
+    }
+}
