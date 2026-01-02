@@ -1,0 +1,18 @@
+class Solution {
+    public boolean isSubsetSum(int[] nums, int t) {
+      int m=nums.length;
+      Boolean[][] memo=new Boolean[m][t+1];
+      return findSubSetSumis(nums,memo,0,0,t);
+    }
+    private boolean findSubSetSumis(int[] nums,Boolean[][] memo,int sum,int index,int t){
+        if(sum==t) return true;
+        if(index==nums.length||sum>t) return false;
+        if(memo[index][sum]!=null) {
+            return memo[index][sum];
+        }
+        boolean take=findSubSetSumis(nums,memo,sum+nums[index],index+1,t);
+        boolean nottake=findSubSetSumis(nums,memo,sum,index+1,t);
+        memo[index][sum]=take||nottake;
+        return memo[index][sum];
+    }
+}
