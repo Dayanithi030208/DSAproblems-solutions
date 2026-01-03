@@ -1,0 +1,21 @@
+class Solution {
+    public boolean canPartition(int[] nums) {
+        int sum=0;
+        for(int num:nums) sum+=num;
+        if(sum%2==1) return false;
+        else{
+            int target=sum/2;
+            Boolean[][] memo=new Boolean[nums.length][target+1];
+            return findPartitionCan(nums,memo,0,target,0);
+        }
+    }
+    private boolean findPartitionCan(int[] nums,Boolean[][] memo,int index,int target,int sum){
+        if(target==sum) return true;
+        if(index==nums.length||sum>target) return false;
+        if(memo[index][sum]!=null) return memo[index][sum];
+        boolean take=findPartitionCan(nums,memo,index+1,target,sum+nums[index]);
+        boolean nottake=findPartitionCan(nums,memo,index+1,target,sum);
+        memo[index][sum]=take||nottake;
+        return memo[index][sum];
+     }
+}
