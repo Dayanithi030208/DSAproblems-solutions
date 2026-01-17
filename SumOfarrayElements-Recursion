@@ -1,0 +1,11 @@
+class Solution {
+    public int arraySum(int[] nums) {
+        int sum=CalSum(0,0,nums);
+        return sum;
+    }
+    private int CalSum(int index,int sum,int[] nums){
+        if(index==nums.length) return 0;
+        sum=nums[index]+CalSum(index+1,sum,nums);
+        return sum;
+    }
+}
