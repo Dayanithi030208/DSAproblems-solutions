@@ -1,0 +1,16 @@
+class Solution {
+    public int addDigits(int num) {
+        return findingSingleSumOfDigits(num);
+    }
+    private int findingSingleSumOfDigits(int num){
+        if(num/10==0) return num;
+        int newnum=0;
+        int cond=num;
+        while(cond!=0){
+            newnum+=cond%10;
+            cond=cond/10;
+        }
+        num=newnum;
+        return findingSingleSumOfDigits(num);
+    }
+}
