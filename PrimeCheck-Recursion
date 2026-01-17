@@ -1,0 +1,11 @@
+class Solution {
+    public boolean checkPrime(int num) {
+        return CheckingPrime(2,num);
+    }
+    private boolean CheckingPrime(int index,int num){
+        if(num==1) return false;
+        if(index>Math.sqrt(num)) return true;
+        if(num%index==0) return false;
+        return CheckingPrime(index+1,num);
+    }
+}
