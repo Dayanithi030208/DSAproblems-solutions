@@ -1,0 +1,265 @@
+
+
+> Package: `java.util.ArrayList`
+
+---
+
+# 🔹 1️⃣ Creation & Initialization
+
+```java
+ArrayList<Integer> list = new ArrayList<>();
+ArrayList<Integer> list = new ArrayList<>(initialCapacity);
+ArrayList<Integer> list = new ArrayList<>(collection);
+```
+
+---
+
+# 🔹 2️⃣ Add / Insert Elements
+
+```java
+add(E e)                 // add at end
+add(int index, E e)      // add at specific index
+addAll(Collection c)     // add all elements
+addAll(int index, Collection c)
+```
+
+Example:
+
+```java
+list.add(10);
+list.add(1, 20);
+```
+
+---
+
+# 🔹 3️⃣ Access Elements
+
+```java
+get(int index)           // get element at index
+```
+
+Example:
+
+```java
+int x = list.get(0);
+```
+
+⏱️ **Time:** O(1)
+
+---
+
+# 🔹 4️⃣ Update / Modify Elements
+
+```java
+set(int index, E e)      // replace element at index
+```
+
+Example:
+
+```java
+list.set(0, 100);
+```
+
+---
+
+# 🔹 5️⃣ Remove Elements
+
+```java
+remove(int index)        // remove by index
+remove(Object o)         // remove first occurrence
+removeAll(Collection c) // remove all matching
+clear()                  // remove everything
+```
+
+⚠️ Removing by index causes **shifting → O(n)**
+
+---
+
+# 🔹 6️⃣ Search / Check
+
+```java
+contains(Object o)       // true if exists
+indexOf(Object o)        // first index
+lastIndexOf(Object o)    // last index
+```
+
+⏱️ **Time:** O(n)
+
+---
+
+# 🔹 7️⃣ Size & State
+
+```java
+size()                   // number of elements
+isEmpty()                // check empty
+```
+
+---
+
+# 🔹 8️⃣ Iteration Methods
+
+```java
+forEach(Consumer action)
+iterator()
+listIterator()
+listIterator(int index)
+```
+
+Examples:
+
+```java
+for(int x : list) {}
+```
+
+```java
+Iterator<Integer> it = list.iterator();
+```
+
+---
+
+# 🔹 9️⃣ Conversion Utilities
+
+```java
+toArray()
+toArray(T[] a)
+```
+
+Example:
+
+```java
+Integer[] arr = list.toArray(new Integer[0]);
+```
+
+---
+
+# 🔹 🔟 Sorting & Reordering
+
+```java
+Collections.sort(list)
+Collections.reverse(list)
+Collections.shuffle(list)
+```
+
+Java 8+:
+
+```java
+list.sort(Comparator.naturalOrder());
+```
+
+---
+
+# 🔹 1️⃣1️⃣ Sublist (VERY IMPORTANT)
+
+```java
+subList(int fromIndex, int toIndex)
+```
+
+⚠️ Returns a **view**, not a new list.
+
+```java
+List<Integer> sub = list.subList(1, 4);
+```
+
+---
+
+# 🔹 1️⃣2️⃣ Capacity Management (Advanced)
+
+```java
+ensureCapacity(int minCapacity)
+trimToSize()
+```
+
+Used for **performance tuning**, rarely in interviews.
+
+---
+
+# 🔹 1️⃣3️⃣ Equality & Hashing
+
+```java
+equals(Object o)
+hashCode()
+```
+
+Two lists are equal if:
+
+* Same size
+* Same elements
+* Same order
+
+---
+
+# 🔹 1️⃣4️⃣ Java 8+ Stream Support
+
+```java
+stream()
+parallelStream()
+```
+
+Example:
+
+```java
+list.stream().filter(x -> x > 10).forEach(System.out::println);
+```
+
+---
+
+# 🔹 1️⃣5️⃣ Clone (Shallow Copy)
+
+```java
+clone()
+```
+
+⚠️ Copies structure, not deep objects.
+
+---
+
+# 🔹 1️⃣6️⃣ Replace / Bulk Operations
+
+```java
+replaceAll(UnaryOperator op)
+retainAll(Collection c)
+```
+
+---
+
+# 🔹 1️⃣7️⃣ Internal / Less Used (Still Good to Know)
+
+```java
+spliterator()
+```
+
+---
+
+# 📌 Most Important Methods (Interview Focus)
+
+| Category | Methods                    |
+| -------- | -------------------------- |
+| Add      | `add`, `addAll`            |
+| Access   | `get`                      |
+| Remove   | `remove`, `clear`          |
+| Search   | `contains`, `indexOf`      |
+| Modify   | `set`                      |
+| Size     | `size`, `isEmpty`          |
+| Sort     | `sort`, `Collections.sort` |
+| Iterate  | `iterator`, for-each       |
+
+---
+
+# 🧠 Time Complexity Summary (VERY IMPORTANT)
+
+| Operation         | Time               |
+| ----------------- | ------------------ |
+| Access (get/set)  | **O(1)**           |
+| Add at end        | **O(1)** amortized |
+| Add/remove middle | **O(n)**           |
+| Search            | **O(n)**           |
+| Iteration         | **O(n)**           |
+
+---
+
+# 🔑 Mental Model (Lock This In)
+
+> **ArrayList = Dynamic Array**
+> Fast access, slow middle insertion/removal.
+
+
