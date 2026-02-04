@@ -1,0 +1,25 @@
+class Solution {
+    static final int MOD = 1000000007;
+    public int perfectSum(int[] arr, int K) {
+        int m = arr.length;
+        int[][] memo = new int[m][K+1];
+        for(int i = 0;i < m;i++){
+            Arrays.fill(memo[i],-1);
+        } 
+        return findSubsetsSumK(arr,K,0,0,memo);
+    }
+    private int findSubsetsSumK(int[] arr,int K,int index,int sum,int[][] memo){
+        if (index == arr.length){
+            return sum == K ? 1 : 0;
+        }
+        if(sum > K) return 0;
+        if (memo[index][sum] != -1){
+            return memo[index][sum];
+        }
+        int take = findSubsetsSumK(arr,K,index + 1,sum + arr[index],memo);
+        int nottake = findSubsetsSumK(arr,K,index + 1,sum,memo);
+        memo[index][sum] = (take + nottake) % MOD;
+        return memo[index][sum];
+    }
+}
+
