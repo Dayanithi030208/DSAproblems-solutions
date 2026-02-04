@@ -1,0 +1,24 @@
+class Solution {
+    public int kDistinctChar(String s, int k) {
+        //your code goes here
+        int left = 0;
+        int max = 0;
+        int n = s.length();
+        HashMap<Character,Integer> characterFrequencyMap = new HashMap<>();
+        int count = 0;
+        for(int right = 0;right < n;right++){
+            char ch = s.charAt(right);
+            characterFrequencyMap.put(ch,characterFrequencyMap.getOrDefault(ch,0)+1);
+            count++;
+            while(left <= right && characterFrequencyMap.size() > k){
+                char check = s.charAt(left);
+                characterFrequencyMap.put(check,characterFrequencyMap.getOrDefault(check,0)-1);
+                left++;
+                count--;
+                if(characterFrequencyMap.get(check) == 0) characterFrequencyMap.remove(check);
+            }
+            max = Math.max(max,count);
+        }
+        return max;
+    }
+}
