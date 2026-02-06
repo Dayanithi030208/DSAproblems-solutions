@@ -1,0 +1,24 @@
+class Solution {
+    public List<String> findPath(int[][] grid) {
+        //your code goes here
+        List<String> result = new ArrayList<>();
+        findingAvailPath(grid,result,new String(),0,0);
+        return result;
+    }
+    private void findingAvailPath(int[][] grid , List<String> result,String current,int row,int col){
+        if(row < 0 || col < 0 || row == grid.length || col == grid[0].length || grid[row][col] != 1) return;
+        if(row == grid.length - 1 && col == grid[0].length - 1){
+            if(grid[row][col] == 1){
+                result.add(current);
+                return;
+            }
+        }
+        int temp = grid[row][col];
+        grid[row][col] = -1;
+        findingAvailPath(grid,result,current+"R",row,col+1);
+        findingAvailPath(grid,result,current+"D",row+1,col);
+        findingAvailPath(grid,result,current+"L",row,col-1);
+        findingAvailPath(grid,result,current+"U",row-1,col);
+        grid[row][col] = temp;
+    }
+}
