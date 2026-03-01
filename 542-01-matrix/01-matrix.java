@@ -18,14 +18,12 @@ class Solution {
         int[][] result = new int[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                result[i][j] = -1;
-            }
-        }
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
                 if (grid[i][j] == 0) {
                     queue.offer(new Pair(i, j, 0));
                     result[i][j] = 0;
+                }
+                else{
+                    result[i][j] = -1;
                 }
             }
         }
