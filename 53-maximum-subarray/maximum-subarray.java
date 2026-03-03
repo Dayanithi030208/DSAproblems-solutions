@@ -9,16 +9,28 @@ class Solution {
         //     }
         // }
         // return maxsum;
-        int sum=0;
-        for(int i=0;i<nums.length;i++){
-            sum+=nums[i];
-            if(sum>maxsum){
-                maxsum=sum;
-            }
-            if(sum<0){
-                sum=0;
-            }
+        // int sum=0;
+        // for(int i=0;i<nums.length;i++){
+        //     sum+=nums[i];
+        //     if(sum>maxsum){
+        //         maxsum=sum;
+        //     }
+        //     if(sum<0){
+        //         sum=0;
+        //     }
+        // }
+        // return maxsum;
+        int currentSum = nums[0];
+        int maxSum = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+
+            currentSum = Math.max(nums[i],
+                                  currentSum + nums[i]);
+
+            maxSum = Math.max(maxSum, currentSum);
         }
-        return maxsum;
+
+        return maxSum;
     }
 }
