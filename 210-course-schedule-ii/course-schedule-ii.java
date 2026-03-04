@@ -7,7 +7,7 @@ class Solution {
         for (int[] it : prerequisites){
             int u = it[0];
             int v = it[1];
-            adj.get(u).add(v);
+            adj.get(v).add(u);
         }
         int[] indegree = new int[numCourses];
         for(int i = 0 ; i < numCourses ; i++){
@@ -37,7 +37,7 @@ class Solution {
         if(count != numCourses) return new int[] {};
         int[] ans = new int[numCourses];
         for (int i = 0 ; i < numCourses ; i++){
-            ans[numCourses - i -1] = result.get(i);
+            ans[i] = result.get(i);
         }
         return ans;
     }
