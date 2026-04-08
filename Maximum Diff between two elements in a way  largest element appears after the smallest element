@@ -1,0 +1,29 @@
+// Java program to find Maximum difference
+// between two elements such that larger
+// element appears after the smaller number
+import java.util.*;
+
+class GfG {
+    
+    static int maxDiff(int[] arr) {
+        int n = arr.length;
+
+        int ans = -1;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                
+                // If arr[j] > arr[i]
+                if (arr[j] > arr[i]) {
+                    ans = Math.max(ans, arr[j] - arr[i]);
+                }
+            }
+        }
+        
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {2, 3, 10, 6, 4, 8, 1};
+        System.out.println(maxDiff(arr));
+    }
+}
