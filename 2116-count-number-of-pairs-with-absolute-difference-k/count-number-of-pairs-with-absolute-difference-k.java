@@ -4,11 +4,11 @@ class Solution {
         int n = nums.length;
         for (int i = 0 ; i < n ; i++){
             int value = nums[i];
-            for (int j = 0 ; j < n ; j++){
+            for (int j = i + 1 ; j < n ; j++){
                 if( j == i) continue;
                 if(Math.abs(value - nums[j]) == k) count++;
             }
         }
-        return count / 2;
+        return count;
     }
 }
