@@ -7,8 +7,8 @@ class Solution {
         int count = 0;
         for (int right = 0 ; right < n; right++){
             prefixsum = ((( prefixsum + nums[right] ) % k + k) % k);
-            if(map.containsKey(prefixsum % k)){
-                count += map.get(prefixsum % k);
+            if(map.containsKey(prefixsum)){
+                count += map.get(prefixsum);
             }
             map.put(prefixsum , map.getOrDefault(prefixsum , 0 ) + 1);
         }
