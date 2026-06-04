@@ -1,0 +1,81 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+
+        // if (list1 == null) return list2;
+        // if (list2 == null) return list1;
+        // ListNode trv1 = list1;
+        // ListNode trv2 = list2;
+        // ListNode temp;   
+        // ListNode head;  
+        // if (trv1.val <= trv2.val) {
+        //     head = trv1;
+        //     trv1 = trv1.next;
+        // } else {
+        //     head = trv2;
+        //     trv2 = trv2.next;
+        // }
+        // temp = head;
+        // while (trv1 != null && trv2 != null) {
+        //     if (trv1.val <= trv2.val) {
+        //         temp.next = trv1;
+        //         trv1 = trv1.next;
+        //     } else {
+        //         temp.next = trv2;
+        //         trv2 = trv2.next;
+        //     }
+        //     temp = temp.next;
+        // }
+        // if (trv1 != null) {
+        //     temp.next = trv1;
+        // } else if (trv2 != null) {
+        //     temp.next = trv2;
+        // }
+
+        // return head;
+        // if(list1==null) return list2;
+        // if(list2==null) return list1;
+        // if(list1.val<list2.val){
+        //     list1.next=mergeTwoLists(list1.next,list2);
+        //     return list1;
+        // }else{
+        //     list2.next=mergeTwoLists(list1,list2.next);
+        //     return list2;
+        // }
+
+        if(list1 == null) return list2;
+        if(list2 == null) return list1;
+
+        ListNode temp1 = list1;
+        ListNode temp2 = list2;
+        ListNode dummy = new ListNode(-1);
+        ListNode curr = dummy;
+        while(temp1 != null && temp2 != null){
+            if(temp1.val < temp2.val){
+                curr.next = temp1;
+                curr = temp1;
+                temp1 = temp1.next;
+            }
+            else{
+                curr.next = temp2;
+                curr = temp2;
+                temp2 = temp2.next;
+            }
+        }
+        if(temp1 != null) curr.next = temp1;
+        if(temp2 != null) curr.next = temp2;
+        
+        return dummy.next;
+        }
+    }
+
