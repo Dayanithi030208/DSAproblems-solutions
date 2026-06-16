@@ -7,8 +7,8 @@ class Solution {
         long right = sqrt;
         while(left <= right){
             long value = ( left * left ) + ( right * right );
-            if ( value == (long) c) return true;
-            else if ( value > (long) c) right = right - 1; 
+            if ( value == c) return true;
+            else if ( value > c) right = right - 1; 
             else left = left + 1;
         }
         return false;
