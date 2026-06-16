@@ -1,17 +1,20 @@
 class Solution {
     public int findPairs(int[] nums, int k) {
         int n = nums.length;
-        HashSet<String> pairs = new HashSet<>();
-        for(int i = 0 ; i < n ; i++){
-            for(int j = i + 1 ; j < n ; j++){
-               int value = Math.abs(nums[i] - nums[j]);
-               if(value == k){
-                int a = Math.min(nums[i] , nums[j]);
-                int b = Math.max(nums[i] , nums[j]);
-                pairs.add( a + " , " + b );
-               }
+        HashMap<Integer , Integer> freq = new HashMap<>();
+        int count = 0;
+        for(int num : nums){
+            freq.put(num , freq.getOrDefault(num , 0) + 1);
+        }
+        for(int num : freq.keySet()){
+            if( k != 0 ){
+                int value = num + k;
+                if(freq.containsKey(value)) count++;
+            }
+            else{
+                if(freq.get(num) >= 2) count++;
             }
         }
-        return pairs.size();
+        return count++;
     }
 }
