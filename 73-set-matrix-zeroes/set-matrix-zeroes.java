@@ -1,38 +1,28 @@
 class Solution {
-    public void setZeroes(int[][] matrix) {
-
+    public void setZeroes(int[][] matrix){
         int rows = matrix.length;
         int cols = matrix[0].length;
-
-        boolean[] zeroRow = new boolean[rows];
-        boolean[] zeroCol = new boolean[cols];
-
-        // Mark rows and columns containing 0
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (matrix[i][j] == 0) {
-                    zeroRow[i] = true;
-                    zeroCol[j] = true;
+        boolean firstColZero = false;
+        for(int i = 0 ; i < rows ; i++){
+            if(matrix[i][0] ==0){
+                firstColZero = true;
+            }
+            for(int j = 1; j < cols ; j++){
+                if(matrix[i][j] == 0){
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
                 }
             }
         }
-
-        // Set marked rows to 0
-        for (int i = 0; i < rows; i++) {
-            if (zeroRow[i]) {
-                for (int j = 0; j < cols; j++) {
+        for(int i = rows - 1 ; i >= 0 ; i--){
+            for(int j = cols - 1 ; j > 0 ; j--){
+                if(matrix[i][0] == 0 || matrix[0][j] ==0){
                     matrix[i][j] = 0;
                 }
             }
-        }
-
-        // Set marked columns to 0
-        for (int j = 0; j < cols; j++) {
-            if (zeroCol[j]) {
-                for (int i = 0; i < rows; i++) {
-                    matrix[i][j] = 0;
-                }
+            if(firstColZero){
+                matrix[i][0] = 0;
             }
         }
-    }
+    } 
 }
